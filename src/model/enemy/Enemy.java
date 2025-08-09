@@ -35,10 +35,17 @@ public class Enemy {
             mapVisualisation = EnemyConstants.DEAD_ENEMY_VISUALISATION;
         }
     }
+
     public int getAttack(){
         return attack;
     }
+
     public Coordinates getPosition(){
         return position;
     }
+
+    public Character getMapVisualisation(){
+        return mapVisualisation;
+    }
+
 }

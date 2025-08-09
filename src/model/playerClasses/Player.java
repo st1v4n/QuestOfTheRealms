@@ -6,7 +6,7 @@ import model.enemy.Enemy;
 import java.util.Collection;
 
 public class Player {
-    public static final char mapVisualisation = 'X';
+    private final char mapVisualisation = 'X';
     private final String name;
     private int health;
     private int mana;
@@ -33,6 +33,14 @@ public class Player {
             case ROGUE: constructPlayer(ClassConstants.ROGUE_HEALTH, ClassConstants.ROGUE_MANA, ClassConstants.ROGUE_ATTACK, ClassConstants.ROGUE_DEFENSE);
                 break;
         }
+    }
+
+    public Coordinates getPosition(){
+        return position;
+    }
+
+    public Character getMapVisualisation(){
+        return mapVisualisation;
     }
 
     public void attack(Enemy enemy){
