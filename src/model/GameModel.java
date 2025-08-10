@@ -25,15 +25,6 @@ public class GameModel {
         map = new GameMap(mapFileName, player, enemiesMap, itemsMap);
     }
 
-    public Enemy attackEnemy(Coordinates pos){
-        Enemy enemyToAttack = map.getEnemyAtPosition(pos);
-        if(enemyToAttack == null){
-            throw new IllegalArgumentException("No enemy on this position!");
-        }
-        map.performPlayerAttackOn(enemyToAttack);
-        return enemyToAttack;
-    }
-
     public List<List<Character>> getMap(){
         return map.getMap();
     }
@@ -50,7 +41,7 @@ public class GameModel {
         return map.movePlayer(rowAddition, columnAddition);
     }
 
-    public String playerInfo(){
+    public Map<String, String> playerInfo(){
         return map.getPlayerInfo();
     }
 

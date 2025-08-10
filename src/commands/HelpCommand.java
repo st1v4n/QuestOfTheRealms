@@ -9,8 +9,8 @@ public class HelpCommand implements Command{
 
     @Override
     public void execute(GameModel model, GameView view){
+        view.promptMessage("Available Commands:");
         for(CommandNames commandName : CommandNames.values()){
-            view.promptMessage("Available Command:");
             view.promptMessage(commandName.value);
         }
     }

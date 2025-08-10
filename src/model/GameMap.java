@@ -97,30 +97,57 @@ public class GameMap {
         player.attack(enemy);
     }
 
+    private boolean isSymbolOfEnemy(char positionVisualisation){
+        return positionVisualisation >= 'A' && positionVisualisation <= 'Z';
+    }
+
+    private boolean isSymbolOfBorder(char positionVisualisation){
+        return positionVisualisation == '*';
+    }
+
+    private boolean isItemOnPosition(Coordinates position){
+        return items.containsKey(position);
+    }
+
+    private void pickUpItem(Coordinates position){
+        player.addItemToInventory(items.get(position));
+    }
+
+    private boolean attemptToKillEnemy(Coordinates position){
+        Enemy enemy = enemies.get(position);
+        player.attack(enemy);
+        if(!enemy.isAlive()){
+            enemies.remove(position);
+            return true;
+        }
+        return false;
+    }
+
+    private void changePlayerLocation(int previousRow, int previousColumn, int newRow, int newColumn){
+        map.get(previousRow).set(previousColumn, ' ');
+        player.move(newRow, newColumn);
+        map.get(newRow).set(newColumn, player.getMapVisualisation());
+    }
+
     public synchronized String movePlayer(int rowAddition, int columnAddition){
         int potentialRow = player.getRow() + rowAddition;
         int potentialColumn = player.getColumn() + columnAddition;
         char symbol = map.get(potentialRow).get(potentialColumn);
-        if(symbol != '*'){
+        if(!isSymbolOfBorder(symbol)){
             String actionResult = "";
             Coordinates newPosition = new Coordinates(potentialRow, potentialColumn);
-            if(symbol >= 'A' && symbol <= 'Z'){
-                Enemy enemy = enemies.get(newPosition);
-                player.attack(enemy);
-                if(!enemy.isAlive()){
-                    enemies.remove(newPosition);
-                    actionResult += "Enemy Killed! \n";
+            if(isSymbolOfEnemy(symbol)){
+                if(attemptToKillEnemy(newPosition)){
+                    actionResult += "Enemy killed!";
                 }
                 else{
-                    return "Attacked enemy " + enemy.toString();
+                    return "Attacked " + enemies.get(newPosition).toString();
                 }
             }
             actionResult += "Player moved successfully!";
-            map.get(player.getRow()).set(player.getColumn(), ' ');
-            player.move(potentialRow, potentialColumn);
-            map.get(potentialRow).set(potentialColumn, player.getMapVisualisation());
-            if(items.containsKey(newPosition)){
-                player.addItemToInventory(items.get(newPosition));
+            changePlayerLocation(player.getRow(), player.getColumn(), potentialRow, potentialColumn);
+            if(isItemOnPosition(newPosition)){
+                pickUpItem(newPosition);
                 actionResult += "\nPicked up item: " + items.get(newPosition).toString();
                 items.remove(newPosition);
             }
@@ -131,13 +158,15 @@ public class GameMap {
         }
     }
 
-    public String getPlayerInfo(){
-        return "Class: " + player.getPlayerClass() + " \n"
-                + "Health: " + player.getHealth() + "\n"
-                + "Mana: " + player.getMana() + "\n"
-                + "Attack: " + player.getAttack() + "\n"
-                + "Defense: " + player.getDefense() + "\n"
-                + player.getInventoryContent();
+    public Map<String, String> getPlayerInfo(){
+        return Map.of(
+                "Class", player.getPlayerClass(),
+                "Health", String.valueOf(player.getHealth()),
+                "Mana", String.valueOf(player.getMana()),
+                "Attack", String.valueOf(player.getAttack()),
+                "Defense", String.valueOf(player.getDefense()),
+                "Inventory", player.getInventoryContent()
+        );
     }
 
 }

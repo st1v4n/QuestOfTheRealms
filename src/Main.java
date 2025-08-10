@@ -19,8 +19,8 @@ public class Main {
 
     public static void main(String[] args) {
         Player p = new Player("Ivan", PlayerClass.MAGE);
-        Enemy e = new Enemy(EnemyClass.BANDIT, new Coordinates(2, 1));
-        Item i = new Weapon(15, new Coordinates(12, 1));
+        Enemy e = new Enemy(EnemyClass.BANDIT, new Coordinates(12, 1));
+        Item i = new Weapon(15, new Coordinates(2, 1));
         List<Enemy> allEnemies = new ArrayList<>();
         List<Item> allItems = new ArrayList<>();
         allEnemies.add(e);

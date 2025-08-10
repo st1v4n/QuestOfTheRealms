@@ -6,7 +6,7 @@ import model.enemy.Enemy;
 import model.inventory.Inventory;
 
 public class Player {
-    private final char mapVisualisation = 'X';
+    private final char mapVisualisation = '@';
     private final String name;
     private int health;
     private int mana;

@@ -7,6 +7,6 @@ public class StatsCommand implements Command{
 
     @Override
     public void execute(GameModel model, GameView view){
-        view.promptMessage(model.playerInfo());
+        view.printObjectInformation(model.playerInfo());
     }
 }
