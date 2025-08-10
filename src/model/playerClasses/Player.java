@@ -1,9 +1,9 @@
 package model.playerClasses;
 
+import items.Item;
 import model.Coordinates;
 import model.enemy.Enemy;
-
-import java.util.Collection;
+import model.inventory.Inventory;
 
 public class Player {
     private final char mapVisualisation = 'X';
@@ -14,6 +14,7 @@ public class Player {
     private int defense;
     private final PlayerClass playerClass;
     private Coordinates position = new Coordinates(1,1);
+    private final Inventory inventory;
 
     private void constructPlayer(int _health, int _mana, int _attack, int _defense){
         health = _health;
@@ -25,6 +26,7 @@ public class Player {
     public Player(String _name, PlayerClass _playerClass){
         name = _name;
         playerClass = _playerClass;
+        inventory = new Inventory();
         switch(playerClass){
             case MAGE: constructPlayer(ClassConstants.MAGE_HEALTH, ClassConstants.MAGE_MANA, ClassConstants.MAGE_ATTACK, ClassConstants.MAGE_DEFENSE);
                 break;
@@ -35,15 +37,35 @@ public class Player {
         }
     }
 
-    public Coordinates getPosition(){
-        return position;
+    public int getRow(){
+        return position.getRow();
+    }
+
+    public int getColumn(){
+        return position.getColumn();
     }
 
     public Character getMapVisualisation(){
         return mapVisualisation;
     }
 
-    public void attack(Enemy enemy){
+    public void addHealth(int amount){
+        health += amount;
+    }
+
+    public void addMana(int amount){
+        mana += amount;
+    }
+
+    public void addAttack(int amount){
+        attack += amount;
+    }
+
+    public void addDefense(int amount){
+        defense += amount;
+    }
+
+    public String attack(Enemy enemy){
         if(mana < ClassConstants.MANA_REQUIRED_FOR_ATTACK){
             throw new IllegalStateException("Not enough mana!");
         }
@@ -51,6 +73,7 @@ public class Player {
         int amount = this.attack;
         enemy.takeDamage(amount);
         defend(enemy.getAttack());
+        return this.toString() + " Attacked " + enemy.toString() + " and dealt " + amount + " damage!";
     }
 
     public void defend(int incomingDamage){
@@ -61,11 +84,49 @@ public class Player {
         }
     }
 
-    public void useItem(){
-
+    public void addItemToInventory(Item item){
+        inventory.addItem(item);
     }
 
-    public void run(){
-
+    public void useItem(int index){
+        Item item = inventory.getItemAt(index);
+        if(item == null)throw new IllegalArgumentException("Invalid index!");
+        item.affect(this);
+        inventory.removeItem(item);
     }
+
+    public void move(int row, int column){
+        position.setRow(row);
+        position.setColumn(column);
+    }
+
+    public String getPlayerClass(){
+        return playerClass.value;
+    }
+
+    public int getHealth(){
+        return health;
+    }
+
+    public int getAttack(){
+        return attack;
+    }
+
+    public int getMana(){
+        return mana;
+    }
+
+    public int getDefense(){
+        return defense;
+    }
+
+    public String getInventoryContent(){
+        return inventory.toString();
+    }
+
+    @Override
+    public String toString(){
+        return name + ": " + playerClass.value + " with " + health + " health remaining";
+    }
+
 }

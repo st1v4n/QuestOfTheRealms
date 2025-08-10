@@ -3,33 +3,33 @@ package model;
 import java.util.Objects;
 
 public class Coordinates {
-    private int x;
-    private int y;
-    public Coordinates(int _x, int _y){
-        x = _x;
-        y = _y;
+    private int row;
+    private int column;
+    public Coordinates(int _row, int _column){
+        row = _row;
+        column = _column;
     }
     @Override
     public boolean equals(Object other){
         if(this==other)return true;
         if(other == null || this.getClass() != other.getClass())return false;
         Coordinates help = (Coordinates) other;
-        return x == help.x && y == help.y;
+        return row == help.row && column == help.column;
     }
     @Override
     public int hashCode(){
-        return Objects.hash(x, y);
+        return Objects.hash(row, column);
     }
-    public int getX(){
-        return x;
+    public int getRow(){
+        return row;
     }
-    public int getY(){
-        return y;
+    public int getColumn(){
+        return column;
     }
-    public void setX(int _x){
-        x = _x;
+    public void setRow(int _row){
+        row = _row;
     }
-    public void setY(int _y){
-        y = _y;
+    public void setColumn(int _column){
+        column = _column;
     }
 }

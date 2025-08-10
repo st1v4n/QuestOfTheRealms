@@ -1,7 +1,13 @@
 package model.playerClasses;
 
 public enum PlayerClass {
-    MAGE,
-    ROGUE,
-    WARRIOR
+    MAGE("Mage"),
+    ROGUE("Rogue"),
+    WARRIOR("Warrior");
+
+    public final String value;
+
+    private PlayerClass(String _value){
+        value = _value;
+    }
 }

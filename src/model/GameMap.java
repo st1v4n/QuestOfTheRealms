@@ -1,22 +1,21 @@
 package model;
 
+import items.Item;
 import model.enemy.Enemy;
 import model.playerClasses.Player;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class GameMap {
 
     public static final int MINIMUM_MAP_SIZE = 3;
     private List<List<Character>> map;
     private final Player player;
-    private Map<Coordinates, Enemy> enemies;
+    private final Map<Coordinates, Enemy> enemies;
+    private final Map<Coordinates, Item> items;
 
     private boolean isValid(List<List<Character>> _map){
         if(_map.size() < MINIMUM_MAP_SIZE){
@@ -54,21 +53,27 @@ public class GameMap {
     }
 
     private void setEntityCharacters(){
-        int row = player.getPosition().getY();
-        int col = player.getPosition().getX();
+        int row = player.getRow();
+        int col = player.getColumn();
         map.get(row).set(col, player.getMapVisualisation());
         for(Coordinates cord : enemies.keySet()){
-            row = cord.getY();
-            col = cord.getX();
+            row = cord.getRow();
+            col = cord.getColumn();
             map.get(row).set(col, enemies.get(cord).getMapVisualisation());
+        }
+        for(Coordinates cord : items.keySet()){
+            row = cord.getRow();
+            col = cord.getColumn();
+            map.get(row).set(col, items.get(cord).getMapVisualisation());
         }
     }
 
-    public GameMap(String fileName, Player _player, Map<Coordinates, Enemy> _enemies){
+    public GameMap(String fileName, Player _player, Map<Coordinates, Enemy> _enemies, Map<Coordinates, Item> _items){
         map = new ArrayList<>();
         construct(fileName);
         player = _player;
         enemies = _enemies;
+        items = _items;
         setEntityCharacters();
     }
 
@@ -81,15 +86,58 @@ public class GameMap {
     }
 
     public List<List<Character>> getMap(){
-        return map;
+        return Collections.unmodifiableList(map);
     }
 
-    public Player getPlayer(){
-        return player;
+    public Enemy getEnemyAtPosition(Coordinates position){
+        return enemies.get(position);
     }
 
-    public Map<Coordinates, Enemy> getEnemies(){
-        return enemies;
+    public void performPlayerAttackOn(Enemy enemy){
+        player.attack(enemy);
+    }
+
+    public synchronized String movePlayer(int rowAddition, int columnAddition){
+        int potentialRow = player.getRow() + rowAddition;
+        int potentialColumn = player.getColumn() + columnAddition;
+        char symbol = map.get(potentialRow).get(potentialColumn);
+        if(symbol != '*'){
+            String actionResult = "";
+            Coordinates newPosition = new Coordinates(potentialRow, potentialColumn);
+            if(symbol >= 'A' && symbol <= 'Z'){
+                Enemy enemy = enemies.get(newPosition);
+                player.attack(enemy);
+                if(!enemy.isAlive()){
+                    enemies.remove(newPosition);
+                    actionResult += "Enemy Killed! \n";
+                }
+                else{
+                    return "Attacked enemy " + enemy.toString();
+                }
+            }
+            actionResult += "Player moved successfully!";
+            map.get(player.getRow()).set(player.getColumn(), ' ');
+            player.move(potentialRow, potentialColumn);
+            map.get(potentialRow).set(potentialColumn, player.getMapVisualisation());
+            if(items.containsKey(newPosition)){
+                player.addItemToInventory(items.get(newPosition));
+                actionResult += "\nPicked up item: " + items.get(newPosition).toString();
+                items.remove(newPosition);
+            }
+            return actionResult;
+        }
+        else{
+            return "There is an obstacle on the map and moving is not allowed!";
+        }
+    }
+
+    public String getPlayerInfo(){
+        return "Class: " + player.getPlayerClass() + " \n"
+                + "Health: " + player.getHealth() + "\n"
+                + "Mana: " + player.getMana() + "\n"
+                + "Attack: " + player.getAttack() + "\n"
+                + "Defense: " + player.getDefense() + "\n"
+                + player.getInventoryContent();
     }
 
 }
