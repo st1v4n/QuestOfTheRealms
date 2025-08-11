@@ -1,6 +1,6 @@
 package model.inventory;
 
-import items.Item;
+import model.items.Item;
 
 import java.util.ArrayList;
 import java.util.List;

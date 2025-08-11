@@ -1,31 +1,22 @@
 package model;
 
-import items.Item;
+import model.actionResults.ActionResult;
+import model.gameObjects.GameObject;
+import model.items.Item;
 import model.enemy.Enemy;
+import model.mapGenerators.MapGenerator;
 import model.playerClasses.Player;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class GameModel {
 
     private final GameMap map;
 
-    public GameModel(Player player, List<Enemy> _enemies, List<Item> _items, String mapFileName){
-        Map<Coordinates, Enemy> enemiesMap = new HashMap<>();
-        for(int i = 0;i<_enemies.size();++i){
-            Enemy current = _enemies.get(i);
-            enemiesMap.put(new Coordinates(current.getRow(), current.getColumn()), current);
-        }
-        Map<Coordinates, Item> itemsMap = new HashMap<>();
-        for(int i = 0;i<_items.size();++i){
-            Item current = _items.get(i);
-            itemsMap.put(new Coordinates(current.getRow(), current.getColumn()), current);
-        }
-        map = new GameMap(mapFileName, player, enemiesMap, itemsMap);
+    public GameModel(String mapFileName, Player player){
+        map = MapGenerator.generateNewMapFromFile(mapFileName, player);
     }
 
-    public List<List<Character>> getMap(){
+    public List<List<GameObject>> getMap(){
         return map.getMap();
     }
 
@@ -37,12 +28,44 @@ public class GameModel {
         return map.getYBorder();
     }
 
-    public String movePlayer(int rowAddition, int columnAddition){
+    public ActionResult movePlayer(int rowAddition, int columnAddition){
         return map.movePlayer(rowAddition, columnAddition);
     }
 
-    public Map<String, String> playerInfo(){
-        return map.getPlayerInfo();
+    public int getPlayerHealth(){
+        return map.getPlayerHealth();
+    }
+
+    public int getPlayerMana(){
+        return map.getPlayerMana();
+    }
+
+    public int getPlayerAttack(){
+        return map.getPlayerAttack();
+    }
+
+    public int getPlayerDefense(){
+        return map.getPlayerDefense();
+    }
+
+    public String getPlayerInventoryContent(){
+        return map.getPlayerInventoryContent();
+    }
+
+    public ActionResult addEnemyAt(Enemy enemy, int row, int col){
+        return map.addEnemyAt(enemy, row, col);
+    }
+
+    public ActionResult addItemAt(Item item, int row, int col){
+        return map.addItemAt(item, row, col);
+    }
+
+    public Player getPlayer(){
+        return map.getPlayer();
+    }
+
+    public ActionResult attackAt(int rowAddition, int colAddition){
+        return map.attackAt(rowAddition, colAddition);
     }
 
 }

@@ -7,7 +7,7 @@ public enum PlayerClass {
 
     public final String value;
 
-    private PlayerClass(String _value){
-        value = _value;
+    private PlayerClass(String value){
+        this.value = value;
     }
 }

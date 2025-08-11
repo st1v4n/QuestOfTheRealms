@@ -1,16 +1,14 @@
 import controller.GameController;
-import items.Item;
-import items.Weapon;
-import model.Coordinates;
+import model.items.Item;
+import model.items.Potion;
 import model.GameModel;
+import model.enemy.Bandit;
 import model.enemy.Enemy;
-import model.enemy.EnemyClass;
 import model.playerClasses.Player;
 import model.playerClasses.PlayerClass;
 import view.GameView;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
 
 public class Main {
@@ -19,18 +17,16 @@ public class Main {
 
     public static void main(String[] args) {
         Player p = new Player("Ivan", PlayerClass.MAGE);
-        Enemy e = new Enemy(EnemyClass.BANDIT, new Coordinates(12, 1));
-        Item i = new Weapon(15, new Coordinates(2, 1));
-        List<Enemy> allEnemies = new ArrayList<>();
-        List<Item> allItems = new ArrayList<>();
-        allEnemies.add(e);
-        allItems.add(i);
-        GameModel gm = new GameModel(p, allEnemies, allItems, mapFileName);
-        GameView gw = new GameView();
-        GameController gc = new GameController(gm, gw);
+        Enemy enemy = new Bandit();
+        Item item = new Potion(50, 20);
+        GameView gameView = new GameView(new Scanner(System.in));
+        GameModel gameModel = new GameModel(mapFileName, p);
+        gameModel.addEnemyAt(enemy, 2,1);
+        gameModel.addItemAt(item,12,1);
+        GameController gameController = new GameController(gameModel, gameView);
         while (true) {
             try {
-                gc.generateCommand();
+                gameController.generateCommand();
             }
             catch(Exception exc){
                 System.out.println(exc.getMessage());

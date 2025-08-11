@@ -15,6 +15,10 @@ public class CommandFactory {
         commands.put(CommandNames.PRINT_MAP.value, new PrintMapCommand());
         commands.put(CommandNames.HELP.value, new HelpCommand());
         commands.put(CommandNames.STATS.value, new StatsCommand());
+        commands.put(CommandNames.ATTACK_DOWN.value, new AttackDownCommand());
+        commands.put(CommandNames.ATTACK_LEFT.value, new AttackLeftCommand());
+        commands.put(CommandNames.ATTACK_RIGHT.value, new AttackRightCommand());
+        commands.put(CommandNames.ATTACK_UP.value, new AttackUpCommand());
     }
 
     public Command create(String commandName){

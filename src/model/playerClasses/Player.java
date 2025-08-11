@@ -1,31 +1,32 @@
 package model.playerClasses;
 
-import items.Item;
-import model.Coordinates;
+import model.items.Item;
 import model.enemy.Enemy;
 import model.inventory.Inventory;
 
 public class Player {
-    private final char mapVisualisation = '@';
     private final String name;
     private int health;
     private int mana;
     private int attack;
     private int defense;
     private final PlayerClass playerClass;
-    private Coordinates position = new Coordinates(1,1);
+    private int row;
+    private int column;
     private final Inventory inventory;
 
-    private void constructPlayer(int _health, int _mana, int _attack, int _defense){
-        health = _health;
-        mana = _mana;
-        attack = _attack;
-        defense = _defense;
+    private void constructPlayer(int health, int mana, int attack, int defense){
+        this.health = health;
+        this.mana = mana;
+        this.attack = attack;
+        this.defense = defense;
     }
 
-    public Player(String _name, PlayerClass _playerClass){
-        name = _name;
-        playerClass = _playerClass;
+    public Player(String name, PlayerClass playerClass){
+        this.name = name;
+        this.playerClass = playerClass;
+        this.row = 1;
+        this.column = 1;
         inventory = new Inventory();
         switch(playerClass){
             case MAGE: constructPlayer(ClassConstants.MAGE_HEALTH, ClassConstants.MAGE_MANA, ClassConstants.MAGE_ATTACK, ClassConstants.MAGE_DEFENSE);
@@ -38,15 +39,11 @@ public class Player {
     }
 
     public int getRow(){
-        return position.getRow();
+        return row;
     }
 
     public int getColumn(){
-        return position.getColumn();
-    }
-
-    public Character getMapVisualisation(){
-        return mapVisualisation;
+        return column;
     }
 
     public void addHealth(int amount){
@@ -65,7 +62,7 @@ public class Player {
         defense += amount;
     }
 
-    public String attack(Enemy enemy){
+    public void attack(Enemy enemy){
         if(mana < ClassConstants.MANA_REQUIRED_FOR_ATTACK){
             throw new IllegalStateException("Not enough mana!");
         }
@@ -73,7 +70,6 @@ public class Player {
         int amount = this.attack;
         enemy.takeDamage(amount);
         defend(enemy.getAttack());
-        return this.toString() + " Attacked " + enemy.toString() + " and dealt " + amount + " damage!";
     }
 
     public void defend(int incomingDamage){
@@ -96,8 +92,8 @@ public class Player {
     }
 
     public void move(int row, int column){
-        position.setRow(row);
-        position.setColumn(column);
+        this.row = row;
+        this.column = column;
     }
 
     public String getPlayerClass(){
@@ -126,6 +122,10 @@ public class Player {
 
     @Override
     public String toString(){
+        return "Player";
+    }
+
+    public String getInfo(){
         return name + ": " + playerClass.value + " with " + health + " health remaining";
     }
 

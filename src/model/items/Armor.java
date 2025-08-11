@@ -1,16 +1,13 @@
-package items;
+package model.items;
 
-import model.Coordinates;
 import model.playerClasses.Player;
 
 public class Armor extends Item{
 
     private final int defenseBoost;
-    private static final char mapVisualisation = 'a';
 
-    public Armor(int _defenseBoost, Coordinates _position){
-        super(_position, mapVisualisation);
-        defenseBoost = _defenseBoost;
+    public Armor(int defenseBoost){
+        this.defenseBoost = defenseBoost;
     }
 
     public int getDefenseBoost(){
@@ -24,6 +21,10 @@ public class Armor extends Item{
 
     @Override
     public String toString(){
+        return "Armor";
+    }
+
+    public String getInfo(){
         return "Armor with " + defenseBoost + " defense boost";
     }
 

@@ -1,17 +1,14 @@
-package items;
+package model.items;
 
-import model.Coordinates;
 import model.playerClasses.Player;
 
 
 public class Weapon extends Item{
 
     private final int attackBoost;
-    private static final char mapVisualisation = 'w';
 
-    public Weapon(int _attackBoost, Coordinates position){
-        super(position, mapVisualisation);
-        attackBoost = _attackBoost;
+    public Weapon(int attackBoost){
+        this.attackBoost = attackBoost;
     }
 
     public int getAttackBoost(){
@@ -25,6 +22,10 @@ public class Weapon extends Item{
 
     @Override
     public String toString(){
+        return "Weapon";
+    }
+
+    public String getInfo(){
         return "Weapon with " + attackBoost + " attack boost";
     }
 

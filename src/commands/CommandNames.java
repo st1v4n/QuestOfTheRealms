@@ -7,6 +7,10 @@ public enum CommandNames {
     RIGHT("right"),
     PRINT_MAP("print-map"),
     STATS("stats"),
+    ATTACK_UP("attack-up"),
+    ATTACK_DOWN("attack-down"),
+    ATTACK_LEFT("attack-left"),
+    ATTACK_RIGHT("attack-right"),
     HELP("help");
 
     public final String value;
