@@ -15,47 +15,29 @@ import java.util.Scanner;
 public class GameView {
 
     private final BaseVisualisator visualisator;
-    private final Scanner scan;
-    private final CommandFactory factory;
 
-    public GameView(Scanner scan){
-        visualisator = new ConsoleVisualisator();
-        this.scan = scan;
-        this.factory = new CommandFactory();
+    public GameView(BaseVisualisator visualisator){
+        this.visualisator = visualisator;
     }
 
     public Command getCommand(){
-        System.out.print("Enter a command: ");
-        String commandName;
-        commandName = scan.next();
-        return factory.create(commandName);
+        return visualisator.getCommand();
     }
 
     public void showMessage(String message){
-        System.out.println(message);
+        visualisator.showMessage(message);
     }
 
-    public void printMap(List<List<GameObject>> map, Player player){
-        int rows = map.size();
-        int columns = map.getFirst().size();
-        for(int i = 0;i<rows;++i){
-            for(int j = 0;j<columns;++j){
-                if(i == player.getRow() && j == player.getColumn()){
-                    System.out.print(visualisator.getVisualisation(player.toString()));
-                    continue;
-                }
-                System.out.print(visualisator.getVisualisation(map.get(i).get(j).toString()));
-            }
-            System.out.println();
-        }
+    public void showMap(List<List<GameObject>> map, Player player){
+        visualisator.showMap(map, player);
     }
 
     public void notify(ActionResult result){
-        System.out.println(result.getDescription());
+        visualisator.notify(result);
     }
 
     public String requireUserInput(){
-        return scan.next();
+        return visualisator.requireUserInput();
     }
 
 }

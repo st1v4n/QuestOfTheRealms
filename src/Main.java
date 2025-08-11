@@ -7,6 +7,7 @@ import model.enemy.Enemy;
 import model.playerClasses.Player;
 import model.playerClasses.PlayerClass;
 import view.GameView;
+import view.visualisators.ConsoleVisualisator;
 
 import java.util.Scanner;
 
@@ -19,7 +20,7 @@ public class Main {
         Player p = new Player("Ivan", PlayerClass.MAGE);
         Enemy enemy = new Bandit();
         Item item = new Potion(50, 20);
-        GameView gameView = new GameView(new Scanner(System.in));
+        GameView gameView = new GameView(new ConsoleVisualisator(new Scanner(System.in)));
         GameModel gameModel = new GameModel(mapFileName, p);
         gameModel.addEnemyAt(enemy, 2,1);
         gameModel.addItemAt(item,12,1);
