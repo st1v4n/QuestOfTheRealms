@@ -1,5 +1,6 @@
 package model;
 
+import backgroundActions.quests.QuestPool;
 import model.actionResults.ActionResult;
 import model.gameObjects.GameObject;
 import model.items.Item;
@@ -11,9 +12,11 @@ import java.util.List;
 public class GameModel {
 
     private final GameMap map;
+    private final QuestPool questPool;
 
     public GameModel(String mapFileName, Player player){
         map = MapGenerator.generateNewMapFromFile(mapFileName, player);
+        questPool = new QuestPool(getPlayer());
     }
 
     public List<List<GameObject>> getMap(){
@@ -66,6 +69,22 @@ public class GameModel {
 
     public ActionResult attackAt(int rowAddition, int colAddition){
         return map.attackAt(rowAddition, colAddition);
+    }
+
+    public ActionResult useItemAt(int index){
+        return map.useItemAt(index);
+    }
+
+    public ActionResult startQuest(int index){
+        return questPool.startQuest(index);
+    }
+
+    public String getAvailableQuests(){
+        return questPool.getAvailableQuests();
+    }
+
+    public ActionResult getCompletedQuests(){
+        return map.getCompletedQuests();
     }
 
 }

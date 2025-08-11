@@ -1,5 +1,6 @@
 package model;
 
+import backgroundActions.quests.Quest;
 import model.actionResults.ActionResult;
 import model.actionResults.Status;
 import model.gameObjects.GameObject;
@@ -71,6 +72,28 @@ public class GameMap {
             map.get(potentialRow).set(potentialCol, new Blank());
         }
         return action;
+    }
+
+    public synchronized ActionResult useItemAt(int index){
+        try{
+            player.useItem(index);
+        }
+        catch(IllegalStateException illegalExc){
+            return new ActionResult(Status.ERROR, "You do not have this item!");
+        }
+        catch(ArrayIndexOutOfBoundsException indexOutExc){
+            return new ActionResult(Status.ERROR, "Invalid item index!");
+        }
+        return new ActionResult(Status.SUCCESS, "Successfully used the item!");
+    }
+
+    public ActionResult getCompletedQuests(){
+        StringBuilder sb = new StringBuilder();
+        List<Quest> completedQuests = player.getCompletedQuests();
+        for(int i=0;i<completedQuests.size();++i){
+            sb.append(completedQuests.get(i).getDescription() + "\n");
+        }
+        return new ActionResult(Status.SUCCESS, sb.toString());
     }
 
     public Player getPlayer(){

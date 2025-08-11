@@ -1,5 +1,6 @@
 package view;
 
+import backgroundActions.quests.QuestPool;
 import commands.Command;
 import commands.CommandFactory;
 import model.actionResults.ActionResult;
@@ -51,6 +52,10 @@ public class GameView {
 
     public void notify(ActionResult result){
         System.out.println(result.getDescription());
+    }
+
+    public String requireUserInput(){
+        return scan.next();
     }
 
 }

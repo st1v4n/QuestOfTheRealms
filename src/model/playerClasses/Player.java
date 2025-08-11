@@ -1,8 +1,15 @@
 package model.playerClasses;
 
+import backgroundActions.quests.Quest;
+import model.actionResults.ActionResult;
 import model.items.Item;
 import model.enemy.Enemy;
 import model.inventory.Inventory;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 
 public class Player {
     private final String name;
@@ -14,6 +21,8 @@ public class Player {
     private int row;
     private int column;
     private final Inventory inventory;
+    private Enemy firstKilled = null;
+    private final List<Quest> completedQuests;
 
     private void constructPlayer(int health, int mana, int attack, int defense){
         this.health = health;
@@ -27,6 +36,7 @@ public class Player {
         this.playerClass = playerClass;
         this.row = 1;
         this.column = 1;
+        completedQuests = new ArrayList<>();
         inventory = new Inventory();
         switch(playerClass){
             case MAGE: constructPlayer(ClassConstants.MAGE_HEALTH, ClassConstants.MAGE_MANA, ClassConstants.MAGE_ATTACK, ClassConstants.MAGE_DEFENSE);
@@ -86,7 +96,7 @@ public class Player {
 
     public void useItem(int index){
         Item item = inventory.getItemAt(index);
-        if(item == null)throw new IllegalArgumentException("Invalid index!");
+        if(item == null)throw new IllegalStateException("Invalid item!");
         item.affect(this);
         inventory.removeItem(item);
     }
@@ -127,6 +137,22 @@ public class Player {
 
     public String getInfo(){
         return name + ": " + playerClass.value + " with " + health + " health remaining";
+    }
+
+    public void setFirstKilledEnemy(Enemy enemy){
+        firstKilled = enemy;
+    }
+
+    public Enemy getFirstKilledEnemy(){
+        return firstKilled;
+    }
+
+    public List<Quest> getCompletedQuests(){
+        return Collections.unmodifiableList(completedQuests);
+    }
+
+    public void addCompletedQuest(Quest quest){
+        completedQuests.add(quest);
     }
 
 }
