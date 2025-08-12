@@ -1,6 +1,8 @@
 package model.mapGenerators;
 
 import model.GameMap;
+import model.enemy.Boss;
+import model.enemy.Enemy;
 import model.gameObjects.GameObject;
 import model.playerClasses.Player;
 import model.playerClasses.PlayerClass;
@@ -51,7 +53,9 @@ public class MapGenerator implements BaseMapGenerator{
             }
             if(isValid(map)){
                 Player player = new Player("Ivan", PlayerClass.MAGE);
-                return new GameMap(map, player);
+                GameMap resultMap = new GameMap(map, player);
+                resultMap.addEnemyAt(new Boss(), 11, 11);
+                return resultMap;
             }
             else{
                 throw new InputMismatchException("Map is not valid! Must be at least 3x3 and consistent!");

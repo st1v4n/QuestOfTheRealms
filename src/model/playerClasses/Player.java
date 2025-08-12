@@ -156,12 +156,12 @@ public class Player {
         return completedQuests.contains(quest);
     }
 
-    public void increaseStats(int modifier){
+    public synchronized void increaseStats(int modifier){
         this.attack *= modifier;
         this.defense *= modifier;
     }
 
-    public void decreaseStats(int modifier){
+    public synchronized void decreaseStats(int modifier){
         this.attack /= modifier;
         this.defense /= modifier;
     }
