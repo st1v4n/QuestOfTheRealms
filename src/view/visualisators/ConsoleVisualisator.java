@@ -16,8 +16,8 @@ public class ConsoleVisualisator implements BaseVisualisator{
     private final Map<String, Character> visualisations;
     private final Scanner scan;
 
-    public ConsoleVisualisator(Scanner scan){
-        this.scan = scan;
+    public ConsoleVisualisator(){
+        this.scan = new Scanner(System.in);
         visualisations = new HashMap<>();
         visualisations.put("Player", '@');
         visualisations.put("Bandit", 'B');

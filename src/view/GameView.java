@@ -32,7 +32,7 @@ public class GameView {
         visualisator.showMap(map, player);
     }
 
-    public void notify(ActionResult result){
+    public synchronized void notify(ActionResult result){
         visualisator.notify(result);
     }
 

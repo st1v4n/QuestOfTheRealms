@@ -6,9 +6,7 @@ import model.items.Item;
 import model.enemy.Enemy;
 import model.inventory.Inventory;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
 public class Player {
@@ -22,7 +20,7 @@ public class Player {
     private int column;
     private final Inventory inventory;
     private Enemy firstKilled = null;
-    private final List<Quest> completedQuests;
+    private final Set<Quest> completedQuests;
 
     private void constructPlayer(int health, int mana, int attack, int defense){
         this.health = health;
@@ -36,7 +34,7 @@ public class Player {
         this.playerClass = playerClass;
         this.row = 1;
         this.column = 1;
-        completedQuests = new ArrayList<>();
+        completedQuests = new HashSet<>();
         inventory = new Inventory();
         switch(playerClass){
             case MAGE: constructPlayer(ClassConstants.MAGE_HEALTH, ClassConstants.MAGE_MANA, ClassConstants.MAGE_ATTACK, ClassConstants.MAGE_DEFENSE);
@@ -56,11 +54,11 @@ public class Player {
         return column;
     }
 
-    public void addHealth(int amount){
+    public synchronized void addHealth(int amount){
         health += amount;
     }
 
-    public void addMana(int amount){
+    public synchronized void addMana(int amount){
         mana += amount;
     }
 
@@ -110,7 +108,7 @@ public class Player {
         return playerClass.value;
     }
 
-    public int getHealth(){
+    public synchronized int getHealth(){
         return health;
     }
 
@@ -118,7 +116,7 @@ public class Player {
         return attack;
     }
 
-    public int getMana(){
+    public synchronized int getMana(){
         return mana;
     }
 
@@ -147,12 +145,26 @@ public class Player {
         return firstKilled;
     }
 
-    public List<Quest> getCompletedQuests(){
-        return Collections.unmodifiableList(completedQuests);
+    public Set<Quest> getCompletedQuests(){
+        return Collections.unmodifiableSet(completedQuests);
     }
 
     public void addCompletedQuest(Quest quest){
         completedQuests.add(quest);
+    }
+
+    public boolean hasCompletedQuest(Quest quest){
+        return completedQuests.contains(quest);
+    }
+
+    public void increaseStats(int modifier){
+        this.attack *= modifier;
+        this.defense *= modifier;
+    }
+
+    public void decreaseStats(int modifier){
+        this.attack /= modifier;
+        this.defense /= modifier;
     }
 
 }

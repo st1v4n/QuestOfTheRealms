@@ -3,6 +3,7 @@ package model.mapGenerators;
 import model.GameMap;
 import model.gameObjects.GameObject;
 import model.playerClasses.Player;
+import model.playerClasses.PlayerClass;
 import model.terrain.Blank;
 import model.terrain.Wall;
 
@@ -13,9 +14,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
-public class MapGenerator {
-
-    private static final int MINIMUM_MAP_SIZE = 3;
+public class MapGenerator implements BaseMapGenerator{
 
     private static GameObject generateObjectBySymbol(char symbol){
         switch(symbol){
@@ -42,7 +41,8 @@ public class MapGenerator {
         return true;
     }
 
-    public static GameMap generateNewMapFromFile(String fileName, Player player){
+    @Override
+    public GameMap generateMapFromFile(String fileName){
         List<List<GameObject>> map = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader(fileName))){
             String line;
@@ -50,6 +50,7 @@ public class MapGenerator {
                 map.add(generateRowFromString(line));
             }
             if(isValid(map)){
+                Player player = new Player("Ivan", PlayerClass.MAGE);
                 return new GameMap(map, player);
             }
             else{

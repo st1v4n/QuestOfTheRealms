@@ -29,11 +29,11 @@ public class GameMap {
         return map.getFirst().size();
     }
 
-    public List<List<GameObject>> getMap(){
+    public synchronized List<List<GameObject>> getMap(){
         return Collections.unmodifiableList(map);
     }
 
-    private boolean isBlankPlace(int row, int col){
+    public synchronized boolean isBlankPlace(int row, int col){
         return map.get(row).get(col).getClass() == Blank.class;
     }
 
@@ -89,9 +89,9 @@ public class GameMap {
 
     public ActionResult getCompletedQuests(){
         StringBuilder sb = new StringBuilder();
-        List<Quest> completedQuests = player.getCompletedQuests();
-        for(int i=0;i<completedQuests.size();++i){
-            sb.append(completedQuests.get(i).getDescription() + "\n");
+        Set<Quest> completedQuests = player.getCompletedQuests();
+        for(Quest q : completedQuests){
+            sb.append(q.getDescription() + "\n");
         }
         return new ActionResult(Status.SUCCESS, sb.toString());
     }

@@ -1,22 +1,60 @@
 package model;
 
+import backgroundActions.Day;
+import backgroundActions.DayUpdater;
+import backgroundActions.spawners.EnemySpawner;
+import backgroundActions.spawners.ItemSpawner;
 import backgroundActions.quests.QuestPool;
+import backgroundActions.statsIncreasers.HealthStatIncreaser;
+import backgroundActions.statsIncreasers.ManaStatIncreaser;
 import model.actionResults.ActionResult;
+import model.actionResults.Status;
 import model.gameObjects.GameObject;
 import model.items.Item;
 import model.enemy.Enemy;
+import model.mapGenerators.BaseMapGenerator;
 import model.mapGenerators.MapGenerator;
+import model.notifiers.Notifier;
 import model.playerClasses.Player;
+import view.GameView;
+
+import java.util.InputMismatchException;
 import java.util.List;
 
 public class GameModel {
 
-    private final GameMap map;
+    private GameMap map;
+    private final BaseMapGenerator mapGenerator;
     private final QuestPool questPool;
+    private final Notifier notifier;
+    private final Day daytimer;
+    private final ItemSpawner itemSpawner;
+    private final EnemySpawner enemySpawner;
+    private final HealthStatIncreaser healthStatIncreaser;
+    private final ManaStatIncreaser manaStatIncreaser;
 
-    public GameModel(String mapFileName, Player player){
-        map = MapGenerator.generateNewMapFromFile(mapFileName, player);
-        questPool = new QuestPool(getPlayer());
+    public GameModel(GameView view, String mapFileName){
+        mapGenerator = new MapGenerator();
+        notifier = new Notifier(view);
+        try {
+            map = mapGenerator.generateMapFromFile(mapFileName);
+        }
+        catch(InputMismatchException inputMismatchException){
+            notifier.notify(new ActionResult(Status.ERROR, inputMismatchException.getMessage()));
+            System.exit(-1);
+        }
+        questPool = new QuestPool(getPlayer(), notifier);
+        daytimer = new Day();
+        DayUpdater dayUpdater = new DayUpdater(daytimer, notifier, map.getPlayer());
+        dayUpdater.start();
+        itemSpawner = new ItemSpawner(map, notifier);
+        itemSpawner.start();
+        enemySpawner = new EnemySpawner(map, notifier);
+        enemySpawner.start();
+        healthStatIncreaser = new HealthStatIncreaser(map.getPlayer(), notifier);
+        healthStatIncreaser.start();
+        manaStatIncreaser = new ManaStatIncreaser(map.getPlayer(), notifier);
+        manaStatIncreaser.start();
     }
 
     public List<List<GameObject>> getMap(){
@@ -76,11 +114,14 @@ public class GameModel {
     }
 
     public ActionResult startQuest(int index){
+        if(map.getPlayer().hasCompletedQuest(questPool.getQuestAtIndex(index))){
+            return new ActionResult(Status.ERROR, "Quest already completed!");
+        }
         return questPool.startQuest(index);
     }
 
-    public String getAvailableQuests(){
-        return questPool.getAvailableQuests();
+    public String getAvailableQuestsInfo(){
+        return questPool.getAvailableQuestsInfo();
     }
 
     public ActionResult getCompletedQuests(){

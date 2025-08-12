@@ -9,7 +9,7 @@ public class ViewQuestsCommand implements Command{
 
     @Override
     public ActionResult execute(GameModel model, GameView view){
-        view.showMessage(model.getAvailableQuests());
+        view.showMessage(model.getAvailableQuestsInfo());
         return new ActionResult(Status.SUCCESS, "Printed all available quests!");
     }
 }
