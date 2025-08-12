@@ -47,7 +47,12 @@ public class Enemy implements GameObject {
 
     @Override
     public ActionResult collideOnAttack(Player player){
-        player.attack(this);
+        try {
+            player.attack(this);
+        }
+        catch(IllegalStateException e){
+            return new ActionResult(Status.ERROR, "Not enough mana!");
+        }
         if(this.isAlive()) {
             return new ActionResult(Status.SUCCESS_BUT_NO_UPDATE, "Attacked " + this.getInfo());
         }

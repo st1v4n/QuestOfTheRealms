@@ -24,7 +24,7 @@ public class Player {
 
     private void constructPlayer(int health, int mana, int attack, int defense){
         this.health = health;
-        this.mana = mana;
+        this.mana = 10;
         this.attack = attack;
         this.defense = defense;
     }
