@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MapGenerator implements BaseMapGenerator{
 
-    private static GameObject generateObjectBySymbol(char symbol){
+    private GameObject generateObjectBySymbol(char symbol){
         switch(symbol){
             case '*': return new Wall();
             case ' ': return new Blank();
@@ -24,7 +24,7 @@ public class MapGenerator implements BaseMapGenerator{
         return null;
     }
 
-    private static List<GameObject> generateRowFromString(String line){
+    private List<GameObject> generateRowFromString(String line){
         List<GameObject> result = new ArrayList<>();
         for(int i=0;i<line.length();++i){
             result.add(generateObjectBySymbol(line.charAt(i)));
@@ -32,7 +32,7 @@ public class MapGenerator implements BaseMapGenerator{
         return result;
     }
 
-    private static boolean isValid(List<List<GameObject>> map){
+    private boolean isValid(List<List<GameObject>> map){
         if(map.size() < MINIMUM_MAP_SIZE)return false;
         int expectedLength = map.getFirst().size();
         for(int i = 1;i<map.size();++i){

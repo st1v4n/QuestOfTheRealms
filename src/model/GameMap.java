@@ -34,7 +34,7 @@ public class GameMap {
     }
 
     public synchronized boolean isBlankPlace(int row, int col){
-        return map.get(row).get(col).getClass() == Blank.class;
+        return map.get(row).get(col).getClass().equals(Blank.class);
     }
 
     public synchronized ActionResult addEnemyAt(Enemy enemy, int row, int col){

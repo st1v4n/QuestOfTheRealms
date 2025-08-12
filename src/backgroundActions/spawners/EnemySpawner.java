@@ -46,7 +46,7 @@ public class EnemySpawner extends Thread{
                 do{
                     row = randomGenerator.nextInt(map.getYBorder());
                     col = randomGenerator.nextInt(map.getXBorder());
-                }while(!map.isBlankPlace(row, col));
+                }while(!map.isBlankPlace(row, col) || (row == map.getPlayer().getRow() && col == map.getPlayer().getColumn()));
                 map.addEnemyAt(createEnemy(), row, col);
                 notifier.notify(new ActionResult(Status.SUCCESS, "Spawned new Enemy on the map! Row: " + row + " ; Col: " + col));
             }
