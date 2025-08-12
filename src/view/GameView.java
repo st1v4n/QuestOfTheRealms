@@ -1,16 +1,12 @@
 package view;
 
-import backgroundActions.quests.QuestPool;
 import commands.Command;
-import commands.CommandFactory;
 import model.actionResults.ActionResult;
 import model.gameObjects.GameObject;
 import model.playerClasses.Player;
 import view.visualisators.BaseVisualisator;
-import view.visualisators.ConsoleVisualisator;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class GameView {
 

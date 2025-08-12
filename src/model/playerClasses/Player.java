@@ -1,7 +1,6 @@
 package model.playerClasses;
 
 import backgroundActions.quests.Quest;
-import model.actionResults.ActionResult;
 import model.items.Item;
 import model.enemy.Enemy;
 import model.inventory.Inventory;

@@ -1,7 +1,6 @@
 package view.visualisators;
 
 import commands.Command;
-import commands.CommandFactory;
 import model.actionResults.ActionResult;
 import model.gameObjects.GameObject;
 import model.playerClasses.Player;

@@ -5,7 +5,6 @@ import model.actionResults.Status;
 import model.enemy.Boss;
 import model.notifiers.Notifier;
 import model.playerClasses.Player;
-import view.GameView;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,7 +1,5 @@
 package controller;
 
-import backgroundActions.Day;
-import backgroundActions.DayUpdater;
 import commands.Command;
 import model.GameModel;
 import view.GameView;
