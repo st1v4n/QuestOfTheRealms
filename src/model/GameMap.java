@@ -38,16 +38,16 @@ public class GameMap {
     }
 
     public synchronized ActionResult addEnemyAt(Enemy enemy, int row, int col){
-        if(row == player.getRow() && col == player.getColumn()){
-            return new ActionResult(Status.ERROR, "Tried to spawn enemy on top of the player... (mission failed successfully)");
+        if(!isBlankPlace(row, col) || (row == player.getRow() && col == player.getColumn())){
+            return new ActionResult(Status.ERROR, "Tried to spawn enemy on top of a game object...(mission failed successfully)");
         }
         map.get(row).set(col, enemy);
         return new ActionResult(Status.SUCCESS, "Successfully added enemy!");
     }
 
     public synchronized ActionResult addItemAt(Item item, int row, int col){
-        if(row == player.getRow() && col == player.getColumn()){
-            return new ActionResult(Status.ERROR, "Tried to spawn item on top of the player... (mission failed successfully)");
+        if(!isBlankPlace(row, col) || (row == player.getRow() && col == player.getColumn())){
+            return new ActionResult(Status.ERROR, "Tried to spawn item on top of a game object...(mission failed successfully)");
         }
         map.get(row).set(col, item);
         return new ActionResult(Status.SUCCESS, "Successfully added item!");
