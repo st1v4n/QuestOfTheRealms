@@ -52,6 +52,9 @@ public class Enemy implements GameObject {
             return new ActionResult(Status.SUCCESS_BUT_NO_UPDATE, "Attacked " + this.getInfo());
         }
         else{
+            if(player.getFirstKilledEnemy() == null){
+                player.setFirstKilledEnemy(this);
+            }
             return new ActionResult(Status.SUCCESS, "Killed enemy!");
         }
     }

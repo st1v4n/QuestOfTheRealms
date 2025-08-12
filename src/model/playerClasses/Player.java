@@ -62,11 +62,11 @@ public class Player {
         mana += amount;
     }
 
-    public void addAttack(int amount){
+    public synchronized void addAttack(int amount){
         attack += amount;
     }
 
-    public void addDefense(int amount){
+    public synchronized void addDefense(int amount){
         defense += amount;
     }
 
@@ -112,7 +112,7 @@ public class Player {
         return health;
     }
 
-    public int getAttack(){
+    public synchronized int getAttack(){
         return attack;
     }
 
@@ -120,7 +120,7 @@ public class Player {
         return mana;
     }
 
-    public int getDefense(){
+    public synchronized int getDefense(){
         return defense;
     }
 
@@ -137,11 +137,11 @@ public class Player {
         return name + ": " + playerClass.value + " with " + health + " health remaining";
     }
 
-    public void setFirstKilledEnemy(Enemy enemy){
+    public synchronized void setFirstKilledEnemy(Enemy enemy){
         firstKilled = enemy;
     }
 
-    public Enemy getFirstKilledEnemy(){
+    public synchronized Enemy getFirstKilledEnemy(){
         return firstKilled;
     }
 
