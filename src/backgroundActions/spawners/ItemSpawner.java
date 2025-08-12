@@ -57,7 +57,7 @@ public class ItemSpawner extends Thread{
                 do{
                     row = randomGenerator.nextInt(map.getYBorder());
                     col = randomGenerator.nextInt(map.getXBorder());
-                }while(!map.isBlankPlace(row, col) || (row == map.getPlayer().getRow() && col == map.getPlayer().getColumn()));
+                }while(!map.isBlankPlace(row, col));
                 map.addItemAt(createItem(), row, col);
                 notifier.notify(new ActionResult(Status.SUCCESS, "Spawned new Item on the map! Row: " + row + " ; Col: " + col));
             }
