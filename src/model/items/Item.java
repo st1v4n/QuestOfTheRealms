@@ -23,6 +23,6 @@ public abstract class Item implements GameObject {
     }
     @Override
     public ActionResult collideOnAttack(Player player){
-        return collideOnMovement(player);
+        return new ActionResult(Status.ERROR, "You tried to attack an item!");
     }
 }
