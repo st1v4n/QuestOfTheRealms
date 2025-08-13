@@ -69,7 +69,7 @@ public class Player {
         defense += amount;
     }
 
-    public void attack(Enemy enemy){
+    public synchronized void attack(Enemy enemy){
         if(mana < ClassConstants.MANA_REQUIRED_FOR_ATTACK){
             throw new IllegalStateException("Not enough mana!");
         }
@@ -79,7 +79,7 @@ public class Player {
         defend(enemy.getAttack());
     }
 
-    public void defend(int incomingDamage){
+    public synchronized void defend(int incomingDamage){
         int amount = incomingDamage - ClassConstants.DEFENSE_MULTIPLIER * defense;
         health -= amount;
         if(health <= 0){

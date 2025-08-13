@@ -13,6 +13,11 @@ import java.util.*;
 
 public class GameMap {
 
+    /*
+    Картата е само карта и нейната отговорност е да знае къде какво има!
+    (Погледнете романа, който написах като коментар в модела)
+     */
+
     private List<List<GameObject>> map;
     private final Player player;
 
@@ -53,6 +58,7 @@ public class GameMap {
         return new ActionResult(Status.SUCCESS, "Successfully added item!");
     }
 
+    // функциите move и attack са разделени!
     public synchronized ActionResult movePlayer(int rowAddition, int colAddition){
         int potentialRow = player.getRow() + rowAddition;
         int potentialCol = player.getColumn() + colAddition;
@@ -64,6 +70,7 @@ public class GameMap {
         return action;
     }
 
+    // функциите move и attack са разделени!
     public synchronized ActionResult attackAt(int rowAddition, int colAddition){
         int potentialRow = player.getRow() + rowAddition;
         int potentialCol = player.getColumn() + colAddition;
