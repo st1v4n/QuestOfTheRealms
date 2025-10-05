@@ -1,10 +1,14 @@
 package model.playerClasses;
 
 import backgroundActions.quests.Quest;
+import model.actionResults.ActionResult;
+import model.actionResults.Status;
+import model.gameObjects.GameObject;
 import model.items.Item;
 import model.enemy.Enemy;
 import model.inventory.Inventory;
 
+import javax.swing.*;
 import java.util.*;
 
 
@@ -69,14 +73,24 @@ public class Player {
         defense += amount;
     }
 
-    public synchronized void attack(Enemy enemy){
+    public synchronized ActionResult attack(GameObject target){
         if(mana < ClassConstants.MANA_REQUIRED_FOR_ATTACK){
             throw new IllegalStateException("Not enough mana!");
         }
-        mana -= ClassConstants.MANA_REQUIRED_FOR_ATTACK;
         int amount = this.attack;
-        enemy.takeDamage(amount);
-        defend(enemy.getAttack());
+        ActionResult resultFromAttacking = target.sufferAttack(amount);
+        if(!resultFromAttacking.didFail()) { // ако реално сме ударили чудовище а не нещо друго
+            defend(Integer.parseInt(resultFromAttacking.getDescription()));
+            mana -= ClassConstants.MANA_REQUIRED_FOR_ATTACK;
+            if(resultFromAttacking.didSucceedButNoUpdate()) {
+                return new ActionResult(Status.SUCCESS_BUT_NO_UPDATE, "Attacked: " + target.getInfo());
+            }
+            else{
+                if(firstKilled == null)firstKilled = (Enemy)target;
+                return new ActionResult(Status.SUCCESS, "Killed: " + target.toString());
+            }
+        }
+        return resultFromAttacking;
     }
 
     public synchronized void defend(int incomingDamage){
@@ -134,10 +148,6 @@ public class Player {
 
     public String getInfo(){
         return name + ": " + playerClass.value + " with " + health + " health remaining";
-    }
-
-    public synchronized void setFirstKilledEnemy(Enemy enemy){
-        firstKilled = enemy;
     }
 
     public synchronized Enemy getFirstKilledEnemy(){

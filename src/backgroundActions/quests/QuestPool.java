@@ -17,7 +17,7 @@ public class QuestPool {
         pool = new HashMap<>();
         pool.put(0, new Quest("reach 0 mana", (p)-> (p.getMana() == 0), player, notifier));
         pool.put(1, new Quest("reach 200 defense", (p) -> (p.getDefense() == 200), player, notifier));
-        pool.put(2, new Quest("kill the boss first", (p)-> (p.getFirstKilledEnemy().getClass() == Boss.class), player, notifier));
+        pool.put(2, new Quest("kill the boss first", (p)-> (p.getFirstKilledEnemy() != null && p.getFirstKilledEnemy().getClass() == Boss.class), player, notifier));
     }
 
     public String getAvailableQuestsInfo(){

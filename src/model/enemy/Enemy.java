@@ -41,26 +41,18 @@ public class Enemy implements GameObject {
     }
 
     @Override
-    public ActionResult collideOnMovement(Player player){
+    public ActionResult sufferMovement(){
         return new ActionResult(Status.ERROR, "There is an enemy on the way!");
     }
 
     @Override
-    public ActionResult collideOnAttack(Player player){
-        try {
-            player.attack(this);
-        }
-        catch(IllegalStateException e){
-            return new ActionResult(Status.ERROR, "Not enough mana!");
-        }
+    public ActionResult sufferAttack(int amount){
+        this.takeDamage(amount);
         if(this.isAlive()) {
-            return new ActionResult(Status.SUCCESS_BUT_NO_UPDATE, "Attacked " + this.getInfo());
+            return new ActionResult(Status.SUCCESS_BUT_NO_UPDATE, String.valueOf(this.getAttack()));
         }
         else{
-            if(player.getFirstKilledEnemy() == null){
-                player.setFirstKilledEnemy(this);
-            }
-            return new ActionResult(Status.SUCCESS, "Killed enemy!");
+            return new ActionResult(Status.SUCCESS, String.valueOf(this.getAttack()));
         }
     }
 }

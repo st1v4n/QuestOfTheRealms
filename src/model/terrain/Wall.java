@@ -11,11 +11,13 @@ public class Wall implements GameObject {
         return "Wall";
     }
     @Override
-    public ActionResult collideOnMovement(Player player){
+    public String getInfo(){ return "Just a random wall"; }
+    @Override
+    public ActionResult sufferMovement(){
         return new ActionResult(Status.ERROR, "There is an obstacle on the way!");
     }
     @Override
-    public ActionResult collideOnAttack(Player player){
+    public ActionResult sufferAttack(int amount){
         return new ActionResult(Status.ERROR, "You tried to attack the wall!");
     }
 }

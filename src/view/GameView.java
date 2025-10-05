@@ -8,7 +8,7 @@ import view.visualisators.BaseVisualisator;
 
 import java.util.List;
 
-public class GameView {
+public class GameView implements Observable{
 
     private final BaseVisualisator visualisator;
 
@@ -28,7 +28,8 @@ public class GameView {
         visualisator.showMap(map, player);
     }
 
-    public synchronized void notify(ActionResult result){
+    @Override
+    public synchronized void update(ActionResult result){
         visualisator.notify(result);
     }
 

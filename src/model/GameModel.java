@@ -82,7 +82,8 @@ public class GameModel {
 
     public GameModel(GameView view, String mapFileName){
         mapGenerator = new MapGenerator();
-        notifier = new Notifier(view);
+        notifier = new Notifier();
+        notifier.addObservable(view);
         try {
             map = mapGenerator.generateMapFromFile(mapFileName);
         }

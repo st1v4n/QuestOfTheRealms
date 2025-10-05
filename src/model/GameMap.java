@@ -62,8 +62,13 @@ public class GameMap {
     public synchronized ActionResult movePlayer(int rowAddition, int colAddition){
         int potentialRow = player.getRow() + rowAddition;
         int potentialCol = player.getColumn() + colAddition;
-        ActionResult action = map.get(potentialRow).get(potentialCol).collideOnMovement(player);
+        GameObject objectAtPosition = map.get(potentialRow).get(potentialCol);
+        ActionResult action = objectAtPosition.sufferMovement();
         if(action.didSucceed()){
+            try{
+                player.addItemToInventory((Item)objectAtPosition);
+            }
+            catch(Exception e){} // ако не е било предмет не прави нищо
             map.get(potentialRow).set(potentialCol, new Blank());
             player.move(potentialRow, potentialCol);
         }
@@ -74,7 +79,7 @@ public class GameMap {
     public synchronized ActionResult attackAt(int rowAddition, int colAddition){
         int potentialRow = player.getRow() + rowAddition;
         int potentialCol = player.getColumn() + colAddition;
-        ActionResult action = map.get(potentialRow).get(potentialCol).collideOnAttack(player);
+        ActionResult action = player.attack(map.get(potentialRow).get(potentialCol));
         if(action.didSucceed()){
             map.get(potentialRow).set(potentialCol, new Blank());
         }

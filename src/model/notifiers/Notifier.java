@@ -1,17 +1,29 @@
 package model.notifiers;
 
 import model.actionResults.ActionResult;
-import view.GameView;
+import view.Observable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Notifier {
 
-    private final GameView view;
+    private final List<Observable> observables;
 
-    public Notifier(GameView view){
-        this.view = view;
+    public Notifier(){
+        this.observables = new ArrayList<>();
     }
 
+    public void addObservable(Observable object){
+        observables.add(object);
+    }
+
+    public void removeObservable(Observable object){
+        observables.remove(object);
+    }
     public void notify(ActionResult result){
-        view.notify(result);
+        for(Observable object : observables){
+            object.update(result);
+        }
     }
 }

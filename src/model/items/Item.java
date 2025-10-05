@@ -17,12 +17,11 @@ public abstract class Item implements GameObject {
     public abstract String getInfo();
 
     @Override
-    public ActionResult collideOnMovement(Player player){
-        player.addItemToInventory(this);
+    public ActionResult sufferMovement(){
         return new ActionResult(Status.SUCCESS, "You picked up an item: " + this.getInfo());
     }
     @Override
-    public ActionResult collideOnAttack(Player player){
+    public ActionResult sufferAttack(int amount){
         return new ActionResult(Status.ERROR, "You tried to attack an item!");
     }
 }
