@@ -1,0 +1,1081 @@
+{
+  "map": {
+    "map": [
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "weapon",
+          "attackBoost": 12
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "monster",
+          "health": 1200,
+          "attack": 220
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "boss",
+          "health": 3600,
+          "attack": 300
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "weapon",
+          "attackBoost": 15
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "bandit",
+          "health": 900,
+          "attack": 240
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        }
+      ]
+    ],
+    "player": {
+      "name": "Ivan",
+      "health": 1900,
+      "mana": 310,
+      "attack": 300,
+      "defense": 50,
+      "playerClass": "MAGE",
+      "row": 1,
+      "column": 1,
+      "inventory": {
+        "items": []
+      }
+    }
+  }
+}

@@ -7,8 +7,6 @@ import model.gameObjects.GameObject;
 import model.items.Item;
 import model.enemy.Enemy;
 import model.inventory.Inventory;
-
-import javax.swing.*;
 import java.util.*;
 
 
@@ -23,7 +21,7 @@ public class Player {
     private int column;
     private final Inventory inventory;
     private Enemy firstKilled = null;
-    private final Set<Quest> completedQuests;
+    private transient Set<Quest> completedQuests;
 
     private void constructPlayer(int health, int mana, int attack, int defense){
         this.health = health;
@@ -155,14 +153,17 @@ public class Player {
     }
 
     public Set<Quest> getCompletedQuests(){
+        if(this.completedQuests == null) completedQuests = new HashSet<Quest>(); // защото е transient...
         return Collections.unmodifiableSet(completedQuests);
     }
 
     public void addCompletedQuest(Quest quest){
+        if(this.completedQuests == null) completedQuests = new HashSet<Quest>();
         completedQuests.add(quest);
     }
 
     public boolean hasCompletedQuest(Quest quest){
+        if(this.completedQuests == null) completedQuests = new HashSet<Quest>();
         return completedQuests.contains(quest);
     }
 

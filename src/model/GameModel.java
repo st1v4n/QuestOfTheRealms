@@ -63,34 +63,21 @@ public class GameModel {
     Отделно, player-a е длъжен да каже какво ще направи, като вземе предмета.
     Така 3 функции, с еднакво име, правят 3 различни неща. Затова ги има и трите.
 
-    Въпрос: Защо има Notifier, а не Event Bus (Listener) или както се нарича това в Event-driven архитектурите?
-    Отговор: Защото аз по този начин разбира известяването на view-то при настъпване на някакви събития. Събитията, които могат да настъпят в играта ни обаче
-    се контролират от нишки. Всяка нишка приема Notifier => когато нишката види, че нещо се е случило, ще уведоми notifier-a, който от своя страна ще даде на view-то
-    резултат за визуализация пред потребителя
-
      */
 
     private GameMap map;
-    private final BaseMapGenerator mapGenerator;
-    private final QuestPool questPool;
-    private final Notifier notifier;
-    private final Day daytimer;
-    private final ItemSpawner itemSpawner;
-    private final EnemySpawner enemySpawner;
-    private final HealthStatIncreaser healthStatIncreaser;
-    private final ManaStatIncreaser manaStatIncreaser;
+    private transient BaseMapGenerator mapGenerator;
+    private transient QuestPool questPool;
+    private transient Notifier notifier;
+    private transient Day daytimer;
+    private transient ItemSpawner itemSpawner;
+    private transient EnemySpawner enemySpawner;
+    private transient HealthStatIncreaser healthStatIncreaser;
+    private transient ManaStatIncreaser manaStatIncreaser;
 
-    public GameModel(GameView view, String mapFileName){
-        mapGenerator = new MapGenerator();
+    public void init(GameView view){
         notifier = new Notifier();
         notifier.addObservable(view);
-        try {
-            map = mapGenerator.generateMapFromFile(mapFileName);
-        }
-        catch(InputMismatchException inputMismatchException){
-            notifier.notify(new ActionResult(Status.ERROR, inputMismatchException.getMessage()));
-            System.exit(-1);
-        }
         questPool = new QuestPool(getPlayer(), notifier);
         daytimer = new Day();
         DayUpdater dayUpdater = new DayUpdater(daytimer, notifier, map.getPlayer());
@@ -103,6 +90,18 @@ public class GameModel {
         healthStatIncreaser.start();
         manaStatIncreaser = new ManaStatIncreaser(map.getPlayer(), notifier);
         manaStatIncreaser.start();
+    }
+
+    public GameModel(GameView view, String mapFileName){
+        mapGenerator = new MapGenerator();
+        try {
+            map = mapGenerator.generateMapFromFile(mapFileName);
+        }
+        catch(InputMismatchException inputMismatchException){
+            notifier.notify(new ActionResult(Status.ERROR, inputMismatchException.getMessage()));
+            System.exit(-1);
+        }
+        this.init(view);
     }
 
     public List<List<GameObject>> getMap(){
