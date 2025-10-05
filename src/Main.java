@@ -15,7 +15,7 @@ public class Main {
         GameView gameView = new GameView(new ConsoleVisualisator());
         GameModel gameModel;
         try{
-            gameModel = FileStorage.load(gameView, "save.json");
+            gameModel = FileStorage.load(gameView, "src/save.json");
         }
         catch(FileNotFoundException e){
             gameModel = new GameModel(gameView, mapFileName);

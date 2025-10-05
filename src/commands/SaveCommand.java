@@ -9,7 +9,7 @@ public class SaveCommand implements Command{
 
     @Override
     public ActionResult execute(GameModel model, GameView view){
-        return FileStorage.save(model, "save.json");
+        return FileStorage.save(model, "src/save.json");
     }
 
 }

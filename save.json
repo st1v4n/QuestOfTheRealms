@@ -367,70 +367,9 @@
           "type": "blank"
         },
         {
-          "type": "blank"
-        },
-        {
-          "type": "wall"
-        }
-      ],
-      [
-        {
-          "type": "wall"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "weapon",
-          "attackBoost": 12
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
+          "type": "bandit",
+          "health": 900,
+          "attack": 240
         },
         {
           "type": "wall"
@@ -456,59 +395,6 @@
           "type": "blank"
         },
         {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "wall"
-        }
-      ],
-      [
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
           "type": "wall"
         },
         {
@@ -530,19 +416,10 @@
           "type": "blank"
         },
         {
-          "type": "blank"
+          "type": "wall"
         },
         {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
+          "type": "wall"
         },
         {
           "type": "wall"
@@ -607,6 +484,130 @@
           "type": "blank"
         },
         {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
           "type": "wall"
         },
         {
@@ -710,9 +711,7 @@
           "type": "wall"
         },
         {
-          "type": "monster",
-          "health": 1200,
-          "attack": 220
+          "type": "blank"
         },
         {
           "type": "blank"
@@ -744,69 +743,6 @@
           "type": "blank"
         },
         {
-          "type": "weapon",
-          "attackBoost": 15
-        },
-        {
-          "type": "wall"
-        }
-      ],
-      [
-        {
-          "type": "wall"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
           "type": "blank"
         },
         {
@@ -827,30 +763,13 @@
           "type": "blank"
         },
         {
-          "type": "bandit",
-          "health": 900,
-          "attack": 240
-        },
-        {
           "type": "blank"
         },
         {
           "type": "blank"
         },
         {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
+          "type": "blank"
         },
         {
           "type": "wall"
@@ -863,6 +782,21 @@
         },
         {
           "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
         },
         {
           "type": "blank"
@@ -900,6 +834,68 @@
           "type": "blank"
         },
         {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
           "type": "blank"
         },
         {
@@ -924,7 +920,8 @@
           "type": "blank"
         },
         {
-          "type": "blank"
+          "type": "armor",
+          "defenseBoost": 4
         },
         {
           "type": "blank"
@@ -1066,8 +1063,8 @@
     ],
     "player": {
       "name": "Ivan",
-      "health": 1900,
-      "mana": 310,
+      "health": 1300,
+      "mana": 230,
       "attack": 300,
       "defense": 50,
       "playerClass": "MAGE",
