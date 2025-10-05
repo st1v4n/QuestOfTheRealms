@@ -440,11 +440,6 @@
           "type": "wall"
         },
         {
-          "type": "bandit",
-          "health": 900,
-          "attack": 240
-        },
-        {
           "type": "blank"
         },
         {
@@ -494,6 +489,10 @@
         },
         {
           "type": "blank"
+        },
+        {
+          "type": "armor",
+          "defenseBoost": 14
         },
         {
           "type": "wall"
@@ -825,8 +824,7 @@
           "type": "blank"
         },
         {
-          "type": "armor",
-          "defenseBoost": 11
+          "type": "blank"
         },
         {
           "type": "blank"
@@ -894,7 +892,9 @@
           "type": "blank"
         },
         {
-          "type": "blank"
+          "type": "bandit",
+          "health": 900,
+          "attack": 240
         },
         {
           "type": "blank"
