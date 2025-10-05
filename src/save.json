@@ -243,7 +243,8 @@
           "type": "blank"
         },
         {
-          "type": "blank"
+          "type": "weapon",
+          "attackBoost": 12
         },
         {
           "type": "wall"
@@ -521,7 +522,9 @@
           "type": "wall"
         },
         {
-          "type": "blank"
+          "type": "monster",
+          "health": 1200,
+          "attack": 220
         },
         {
           "type": "blank"
@@ -1063,13 +1066,13 @@
     ],
     "player": {
       "name": "Ivan",
-      "health": 1300,
-      "mana": 240,
+      "health": 1600,
+      "mana": 280,
       "attack": 300,
       "defense": 50,
       "playerClass": "MAGE",
-      "row": 1,
-      "column": 1,
+      "row": 2,
+      "column": 10,
       "inventory": {
         "items": []
       }

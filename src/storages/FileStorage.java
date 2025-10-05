@@ -53,13 +53,15 @@ public class FileStorage{
     }
 
     public static ActionResult save(GameModel game, String filename) {
-        try (FileWriter writer = new FileWriter(filename)) {
-            gson.toJson(game, writer);
-            System.out.println("Game saved to " + filename);
-        } catch (IOException e) {
-            return new ActionResult(Status.ERROR, "Could not save to file!");
+        synchronized (game) {
+            try (FileWriter writer = new FileWriter(filename)) {
+                gson.toJson(game, writer);
+                System.out.println("Game saved to " + filename);
+            } catch (IOException e) {
+                return new ActionResult(Status.ERROR, "Could not save to file!");
+            }
+            return new ActionResult(Status.SUCCESS, "Saved successfully!");
         }
-        return new ActionResult(Status.SUCCESS, "Saved successfully!");
     }
 
     public static GameModel load(GameView view, String filename) throws FileNotFoundException{
