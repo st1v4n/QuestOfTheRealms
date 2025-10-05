@@ -53,7 +53,7 @@ public class FileStorage{
     }
 
     public static ActionResult save(GameModel game, String filename) {
-        synchronized (game) {
+        synchronized (game.map()) {
             try (FileWriter writer = new FileWriter(filename)) {
                 gson.toJson(game, writer);
                 System.out.println("Game saved to " + filename);

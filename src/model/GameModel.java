@@ -167,4 +167,7 @@ public class GameModel {
         return map.getCompletedQuests();
     }
 
+    public GameMap map(){
+        return this.map;
+    }
 }
