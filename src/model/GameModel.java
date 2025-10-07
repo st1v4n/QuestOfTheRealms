@@ -108,6 +108,8 @@ public class GameModel {
     }
 
     public GameMap map(){
-        return this.map;
+        synchronized (map) {
+            return this.map;
+        }
     }
 }

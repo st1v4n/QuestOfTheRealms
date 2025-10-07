@@ -1060,8 +1060,8 @@
     ],
     "player": {
       "name": "Ivan",
-      "health": 1100,
-      "mana": 210,
+      "health": 1200,
+      "mana": 220,
       "attack": 300,
       "defense": 50,
       "playerClass": "MAGE",

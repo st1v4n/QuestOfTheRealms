@@ -24,9 +24,7 @@ public class ManaStatIncreaser extends StatIncreaser{
         while(true){
             try{
                 Thread.sleep(MANA_INCREASE_INTERVAL);
-                synchronized (player) {
-                    increase();
-                }
+                increase();
             }
             catch(InterruptedException e){
                 notifier.notify(new ActionResult(Status.ERROR, "Mana generator failed! Try playing without mana :D"));

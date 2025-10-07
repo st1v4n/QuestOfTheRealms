@@ -61,25 +61,25 @@ public class Player {
         return column;
     }
 
-    public void addHealth(int amount) {
+    public synchronized void addHealth(int amount) {
         health += amount;
     }
 
-    public void addMana(int amount) {
+    public synchronized void addMana(int amount) {
         mana += amount;
         checkForCompletedQuests();
     }
 
-    public void addAttack(int amount) {
+    public synchronized void addAttack(int amount) {
         attack += amount;
     }
 
-    public void addDefense(int amount) {
+    public synchronized void addDefense(int amount) {
         defense += amount;
         checkForCompletedQuests();
     }
 
-    public ActionResult attack(GameObject target) {
+    public synchronized ActionResult attack(GameObject target) {
         if (mana < ClassConstants.MANA_REQUIRED_FOR_ATTACK) {
             throw new IllegalStateException("Not enough mana!");
         }
@@ -102,7 +102,7 @@ public class Player {
         return resultFromAttacking;
     }
 
-    public  void defend(int incomingDamage) {
+    private void defend(int incomingDamage) {
         int amount = incomingDamage - ClassConstants.DEFENSE_MULTIPLIER * defense;
         health -= amount;
         if (health <= 0) {
@@ -114,14 +114,14 @@ public class Player {
         inventory.addItem(item);
     }
 
-    public void useItem(int index) {
+    public synchronized void useItem(int index) {
         Item item = inventory.getItemAt(index);
         if (item == null) throw new IllegalStateException("Invalid item!");
         item.affect(this);
         inventory.removeItem(item);
     }
 
-    public void move(int row, int column) {
+    public synchronized void move(int row, int column) {
         this.row = row;
         this.column = column;
     }
@@ -130,19 +130,19 @@ public class Player {
         return playerClass.value;
     }
 
-    public int getHealth() {
+    public synchronized int getHealth() {
         return health;
     }
 
-    public int getAttack() {
+    public synchronized int getAttack() {
         return attack;
     }
 
-    public int getMana() {
+    public synchronized int getMana() {
         return mana;
     }
 
-    public int getDefense() {
+    public synchronized int getDefense() {
         return defense;
     }
 
@@ -155,7 +155,7 @@ public class Player {
         return "Player";
     }
 
-    public String getInfo() {
+    public synchronized String getInfo() {
         return name + ": " + playerClass.value + " with " + health + " health remaining";
     }
 
@@ -163,11 +163,11 @@ public class Player {
         return firstKilled;
     }
 
-    public Set<String> getCompletedQuests() {
+    public synchronized Set<String> getCompletedQuests() {
         return new HashSet<>(completedQuests);
     }
 
-    public ActionResult startQuest(Quest quest) {
+    public synchronized ActionResult startQuest(Quest quest) {
         if (startedQuests.contains(quest.getName())) {
             return new ActionResult(Status.ERROR, "Quest already started!");
         }
@@ -193,13 +193,13 @@ public class Player {
         }
     }
 
-    public void increaseStats(int modifier){
+    public synchronized void increaseStats(int modifier){
         this.attack *= modifier;
         this.defense *= modifier;
         checkForCompletedQuests();
     }
 
-    public void decreaseStats(int modifier){
+    public synchronized void decreaseStats(int modifier){
         this.attack /= modifier;
         this.defense /= modifier;
         checkForCompletedQuests();

@@ -24,9 +24,7 @@ public class HealthStatIncreaser extends StatIncreaser{
         while(true){
             try{
                 Thread.sleep(HEALTH_INCREASE_INTERVAL);
-                synchronized (player) {
-                    increase();
-                }
+                increase();
             }
             catch(InterruptedException e){
                 notifier.notify(new ActionResult(Status.ERROR, "Health generator failed! Try playing without mana :D"));

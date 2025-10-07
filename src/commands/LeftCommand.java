@@ -8,8 +8,6 @@ public class LeftCommand implements Command{
 
     @Override
     public ActionResult execute(GameModel model, GameView view){
-        synchronized (model.map()) {
-            return model.movePlayer(0, -1);
-        }
+        return model.movePlayer(0, -1);
     }
 }

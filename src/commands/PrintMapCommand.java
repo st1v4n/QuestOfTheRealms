@@ -9,9 +9,7 @@ public class PrintMapCommand implements Command{
 
     @Override
     public ActionResult execute(GameModel model, GameView view){
-        synchronized (model.map()) {
-            view.showMap(model.map().asList(), model.getPlayer());
-            return new ActionResult(Status.SUCCESS, "Printed map");
-        }
+        view.showMap(model.map().asList(), model.getPlayer());
+        return new ActionResult(Status.SUCCESS, "Printed map");
     }
 }

@@ -21,9 +21,7 @@ public class GameController {
             view.showMessage("Invalid command! Use the help command to see all available commands!");
         }
         else{
-            synchronized (model.map()) {
-                view.update(command.execute(model, view));
-            }
+            view.update(command.execute(model, view));
         }
     }
 

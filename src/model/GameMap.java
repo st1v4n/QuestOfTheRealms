@@ -26,32 +26,32 @@ public class GameMap {
         this.player = player;
     }
 
-    public int getYBorder(){
+    public synchronized int getYBorder(){
         return map.size();
     }
 
-    public int getXBorder(){
+    public synchronized int getXBorder(){
         return map.getFirst().size();
     }
 
-    public List<List<GameObject>> asList(){
+    public synchronized List<List<GameObject>> asList(){
         return new ArrayList<>(map);
     }
 
-    public boolean isBlankPlace(int row, int col){
+    public synchronized boolean isBlankPlace(int row, int col){
         return map.get(row).get(col).getClass().equals(Blank.class);
     }
 
-    public ActionResult addEnemyAt(Enemy enemy, int row, int col){
-        if(!isBlankPlace(row, col) || (row == player.getRow() && col == player.getColumn())){
+    public synchronized ActionResult addEnemyAt(Enemy enemy, int row, int col) {
+        if (!isBlankPlace(row, col) || (row == player.getRow() && col == player.getColumn())) {
             return new ActionResult(Status.ERROR, "Tried to spawn enemy on top of a game object...(mission failed successfully)");
         }
         map.get(row).set(col, enemy);
         return new ActionResult(Status.SUCCESS, "Successfully added enemy!");
     }
 
-    public ActionResult addItemAt(Item item, int row, int col){
-        if(!isBlankPlace(row, col) || (row == player.getRow() && col == player.getColumn())){
+    public synchronized ActionResult addItemAt(Item item, int row, int col) {
+        if (!isBlankPlace(row, col) || (row == player.getRow() && col == player.getColumn())) {
             return new ActionResult(Status.ERROR, "Tried to spawn item on top of a game object...(mission failed successfully)");
         }
         map.get(row).set(col, item);
@@ -59,78 +59,68 @@ public class GameMap {
     }
 
     // функциите move и attack са разделени!
-    public ActionResult movePlayer(int rowAddition, int colAddition){
-        synchronized (player) {
-            int potentialRow = player.getRow() + rowAddition;
-            int potentialCol = player.getColumn() + colAddition;
-            GameObject objectAtPosition = map.get(potentialRow).get(potentialCol);
-            ActionResult action = objectAtPosition.sufferMovement();
-            if (action.didSucceed()) {
-                try {
-                    player.addItemToInventory((Item) objectAtPosition);
-                } catch (Exception e) {
-                } // ако не е било предмет не прави нищо
-                map.get(potentialRow).set(potentialCol, new Blank());
-                player.move(potentialRow, potentialCol);
-            }
-            return action;
+    public synchronized ActionResult movePlayer(int rowAddition, int colAddition) {
+        int potentialRow = player.getRow() + rowAddition;
+        int potentialCol = player.getColumn() + colAddition;
+        GameObject objectAtPosition = map.get(potentialRow).get(potentialCol);
+        ActionResult action = objectAtPosition.sufferMovement();
+        if (action.didSucceed()) {
+            try {
+                player.addItemToInventory((Item) objectAtPosition);
+            } catch (Exception e) {
+            } // ако не е било предмет не прави нищо
+            map.get(potentialRow).set(potentialCol, new Blank());
+            player.move(potentialRow, potentialCol);
         }
+        return action;
     }
 
     // функциите move и attack са разделени!
-    public ActionResult attackAt(int rowAddition, int colAddition){
-        synchronized (player) {
-            int potentialRow = player.getRow() + rowAddition;
-            int potentialCol = player.getColumn() + colAddition;
-            ActionResult action = player.attack(map.get(potentialRow).get(potentialCol));
-            if (action.didSucceed()) {
-                map.get(potentialRow).set(potentialCol, new Blank());
-            }
-            return action;
+    public synchronized ActionResult attackAt(int rowAddition, int colAddition) {
+        int potentialRow = player.getRow() + rowAddition;
+        int potentialCol = player.getColumn() + colAddition;
+        ActionResult action = player.attack(map.get(potentialRow).get(potentialCol));
+        if (action.didSucceed()) {
+            map.get(potentialRow).set(potentialCol, new Blank());
         }
+        return action;
     }
 
-    public ActionResult useItemAt(int index){
-        synchronized (player) {
-            try {
-                player.useItem(index);
-            } catch (IllegalStateException illegalExc) {
-                return new ActionResult(Status.ERROR, "You do not have this item!");
-            } catch (ArrayIndexOutOfBoundsException indexOutExc) {
-                return new ActionResult(Status.ERROR, "Invalid item index!");
-            }
-            return new ActionResult(Status.SUCCESS, "Successfully used the item!");
+    public ActionResult useItemAt(int index) {
+        try {
+            player.useItem(index);
+        } catch (IllegalStateException illegalExc) {
+            return new ActionResult(Status.ERROR, "You do not have this item!");
+        } catch (ArrayIndexOutOfBoundsException indexOutExc) {
+            return new ActionResult(Status.ERROR, "Invalid item index!");
         }
+        return new ActionResult(Status.SUCCESS, "Successfully used the item!");
     }
 
-    public ActionResult getCompletedQuests(){
-        synchronized (player) {
-            StringBuilder sb = new StringBuilder();
-            Set<String> completedQuests = player.getCompletedQuests();
-            for (String questName : completedQuests) {
-                sb.append(questName + "\n");
-            }
-            return new ActionResult(Status.SUCCESS, sb.toString());
+    public ActionResult getCompletedQuests() {
+        StringBuilder sb = new StringBuilder();
+        Set<String> completedQuests = player.getCompletedQuests();
+        for (String questName : completedQuests) {
+            sb.append(questName + "\n");
         }
+        return new ActionResult(Status.SUCCESS, sb.toString());
     }
 
-    public String getPlayerInventoryContent(){
-        synchronized (player) {
-            return player.getInventoryContent();
-        }
+    public String getPlayerInventoryContent() {
+        return player.getInventoryContent();
     }
 
     public void setEventNotifier(Notifier notifier){
         player.setNotifier(notifier);
     }
 
-    public ActionResult startQuest(Quest quest){
-        synchronized (player) {
-            return player.startQuest(quest);
-        }
+    public ActionResult startQuest(Quest quest) {
+        return player.startQuest(quest);
     }
 
     public Player getPlayer(){
-        return player;
+        synchronized (player) {
+            return player;
+        }
     }
 }
