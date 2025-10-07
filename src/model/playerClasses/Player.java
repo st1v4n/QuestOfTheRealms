@@ -102,7 +102,7 @@ public class Player {
         return resultFromAttacking;
     }
 
-    private void defend(int incomingDamage) {
+    private synchronized void defend(int incomingDamage) { // не трябва да е synchronised попринцип, защото се извиква само от attack, а тя си е synchronised, но все пак
         int amount = incomingDamage - ClassConstants.DEFENSE_MULTIPLIER * defense;
         health -= amount;
         if (health <= 0) {
