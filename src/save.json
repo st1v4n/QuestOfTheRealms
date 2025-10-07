@@ -299,9 +299,7 @@
           "type": "blank"
         },
         {
-          "type": "monster",
-          "health": 1200,
-          "attack": 220
+          "type": "blank"
         },
         {
           "type": "blank"
@@ -784,9 +782,7 @@
           "type": "blank"
         },
         {
-          "type": "potion",
-          "healthBoost": 44,
-          "manaBoost": 3
+          "type": "blank"
         },
         {
           "type": "blank"
@@ -1064,22 +1060,18 @@
     ],
     "player": {
       "name": "Ivan",
-      "health": 1300,
-      "mana": 240,
+      "health": 1100,
+      "mana": 210,
       "attack": 300,
-      "defense": 2500,
+      "defense": 50,
       "playerClass": "MAGE",
-      "row": 2,
-      "column": 7,
+      "row": 1,
+      "column": 2,
       "inventory": {
         "items": []
       },
-      "startedQuests": [
-        "mana"
-      ],
-      "completedQuests": [
-        "defense"
-      ]
+      "startedQuests": [],
+      "completedQuests": []
     }
   },
   "daytimer": {

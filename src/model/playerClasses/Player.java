@@ -32,7 +32,7 @@ public class Player {
         this.health = health;
         this.mana = mana;
         this.attack = attack;
-        this.defense = 2500;
+        this.defense = defense;
     }
 
     public Player(String name, PlayerClass playerClass){
