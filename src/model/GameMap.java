@@ -34,8 +34,12 @@ public class GameMap {
         return map.getFirst().size();
     }
 
-    public synchronized List<List<GameObject>> asList(){
-        return new ArrayList<>(map);
+    public synchronized List<List<GameObject>> asList(){ // правим deep copy, за да се избегнат проблеми
+        List<List<GameObject>> result = new ArrayList<>();
+        for(int i=0;i<map.size();++i){
+            result.add(new ArrayList<>(map.get(i)));
+        }
+        return result;
     }
 
     public synchronized boolean isBlankPlace(int row, int col){
