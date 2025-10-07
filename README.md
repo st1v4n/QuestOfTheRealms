@@ -14,7 +14,7 @@ Interact with the console via keyboard input
 type "help" to see the available commands
 
 * * Note: when moving, type "up" | "down" | "right" | "left"
-and when attacking, type attack <direction> (same as the directions shown above)
+and when attacking, type attack (direction) (same as the directions shown above)
 The rest is very easy to use
 
 * * Note: Comments are in Bulgarian, mainly explaining my architectural decisions in a Possible Questions and Answers format

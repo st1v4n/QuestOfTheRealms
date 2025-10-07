@@ -1,12 +1,15 @@
 package model.playerClasses;
 
 import backgroundActions.quests.Quest;
+import backgroundActions.quests.QuestPool;
 import model.actionResults.ActionResult;
 import model.actionResults.Status;
 import model.gameObjects.GameObject;
 import model.items.Item;
 import model.enemy.Enemy;
 import model.inventory.Inventory;
+import model.notifiers.Notifier;
+
 import java.util.*;
 
 
@@ -21,13 +24,15 @@ public class Player {
     private int column;
     private final Inventory inventory;
     private Enemy firstKilled = null;
-    private transient Set<Quest> completedQuests;
+    private Set<String> startedQuests;
+    private Set<String> completedQuests;
+    private transient Notifier notifier;
 
     private void constructPlayer(int health, int mana, int attack, int defense){
         this.health = health;
         this.mana = mana;
         this.attack = attack;
-        this.defense = defense;
+        this.defense = 2500;
     }
 
     public Player(String name, PlayerClass playerClass){
@@ -37,6 +42,7 @@ public class Player {
         this.column = 1;
         completedQuests = new HashSet<>();
         inventory = new Inventory();
+        startedQuests = new HashSet<>();
         switch(playerClass){
             case MAGE: constructPlayer(ClassConstants.MAGE_HEALTH, ClassConstants.MAGE_MANA, ClassConstants.MAGE_ATTACK, ClassConstants.MAGE_DEFENSE);
                 break;
@@ -61,6 +67,7 @@ public class Player {
 
     public synchronized void addMana(int amount){
         mana += amount;
+        checkForCompletedQuests();
     }
 
     public synchronized void addAttack(int amount){
@@ -69,6 +76,7 @@ public class Player {
 
     public synchronized void addDefense(int amount){
         defense += amount;
+        checkForCompletedQuests();
     }
 
     public synchronized ActionResult attack(GameObject target){
@@ -80,11 +88,15 @@ public class Player {
         if(!resultFromAttacking.didFail()) { // ако реално сме ударили чудовище а не нещо друго
             defend(Integer.parseInt(resultFromAttacking.getDescription()));
             mana -= ClassConstants.MANA_REQUIRED_FOR_ATTACK;
+            checkForCompletedQuests();
             if(resultFromAttacking.didSucceedButNoUpdate()) {
                 return new ActionResult(Status.SUCCESS_BUT_NO_UPDATE, "Attacked: " + target.getInfo());
             }
             else{
-                if(firstKilled == null)firstKilled = (Enemy)target;
+                if(firstKilled == null) {
+                    firstKilled = (Enemy)target;
+                    checkForCompletedQuests();
+                }
                 return new ActionResult(Status.SUCCESS, "Killed: " + target.toString());
             }
         }
@@ -119,19 +131,19 @@ public class Player {
         return playerClass.value;
     }
 
-    public synchronized int getHealth(){
+    public int getHealth(){
         return health;
     }
 
-    public synchronized int getAttack(){
+    public int getAttack(){
         return attack;
     }
 
-    public synchronized int getMana(){
+    public int getMana(){
         return mana;
     }
 
-    public synchronized int getDefense(){
+    public int getDefense(){
         return defense;
     }
 
@@ -148,33 +160,53 @@ public class Player {
         return name + ": " + playerClass.value + " with " + health + " health remaining";
     }
 
-    public synchronized Enemy getFirstKilledEnemy(){
+    public Enemy getFirstKilledEnemy(){
         return firstKilled;
     }
 
-    public Set<Quest> getCompletedQuests(){
-        if(this.completedQuests == null) completedQuests = new HashSet<Quest>(); // защото е transient...
+    public Set<String> getCompletedQuests(){
         return Collections.unmodifiableSet(completedQuests);
     }
 
-    public void addCompletedQuest(Quest quest){
-        if(this.completedQuests == null) completedQuests = new HashSet<Quest>();
-        completedQuests.add(quest);
+    public synchronized ActionResult startQuest(Quest quest){
+        if(startedQuests.contains(quest.getName())){
+            return new ActionResult(Status.ERROR, "Quest already started!");
+        }
+        if(completedQuests.contains(quest.getName())){
+            return new ActionResult(Status.ERROR, "Quest already completed!");
+        }
+        startedQuests.add(quest.getName());
+        checkForCompletedQuests(); // ако е завършен преди да е добавен
+        return new ActionResult(Status.SUCCESS, "Successfully started quest: " + quest.getDescription());
     }
 
-    public boolean hasCompletedQuest(Quest quest){
-        if(this.completedQuests == null) completedQuests = new HashSet<Quest>();
-        return completedQuests.contains(quest);
+    private void checkForCompletedQuests(){
+        List<String> currently_completed = new ArrayList<>();
+        for(String questName : startedQuests){
+            if(QuestPool.getQuestByName(questName).isCompleted(this)){
+                currently_completed.add(questName);
+                completedQuests.add(questName);
+                notifier.notify(new ActionResult(Status.SUCCESS, "Successfully completed quest: " + questName));
+            }
+        }
+        for(String questName : currently_completed){
+            startedQuests.remove(questName);
+        }
     }
 
     public synchronized void increaseStats(int modifier){
         this.attack *= modifier;
         this.defense *= modifier;
+        checkForCompletedQuests();
     }
 
     public synchronized void decreaseStats(int modifier){
         this.attack /= modifier;
         this.defense /= modifier;
+        checkForCompletedQuests();
     }
 
+    public void setNotifier(Notifier notifier){
+        this.notifier = notifier;
+    }
 }

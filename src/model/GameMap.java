@@ -6,6 +6,7 @@ import model.actionResults.Status;
 import model.gameObjects.GameObject;
 import model.enemy.Enemy;
 import model.items.Item;
+import model.notifiers.Notifier;
 import model.playerClasses.Player;
 import model.terrain.Blank;
 
@@ -14,8 +15,7 @@ import java.util.*;
 public class GameMap {
 
     /*
-    Картата е само карта и нейната отговорност е да знае къде какво има!
-    (Погледнете романа, който написах като коментар в модела)
+    Картата е само карта и нейната отговорност е да знае къде какво има
      */
 
     private List<List<GameObject>> map;
@@ -34,7 +34,7 @@ public class GameMap {
         return map.getFirst().size();
     }
 
-    public synchronized List<List<GameObject>> getMap(){
+    public synchronized List<List<GameObject>> asList(){
         return Collections.unmodifiableList(map);
     }
 
@@ -101,35 +101,26 @@ public class GameMap {
 
     public ActionResult getCompletedQuests(){
         StringBuilder sb = new StringBuilder();
-        Set<Quest> completedQuests = player.getCompletedQuests();
-        for(Quest q : completedQuests){
-            sb.append(q.getDescription() + "\n");
+        Set<String> completedQuests = player.getCompletedQuests();
+        for(String questName : completedQuests){
+            sb.append(questName + "\n");
         }
         return new ActionResult(Status.SUCCESS, sb.toString());
-    }
-
-    public Player getPlayer(){
-        return player;
-    }
-
-    public int getPlayerHealth(){
-        return player.getHealth();
-    }
-
-    public int getPlayerMana(){
-        return player.getMana();
-    }
-
-    public int getPlayerAttack(){
-        return player.getAttack();
-    }
-
-    public int getPlayerDefense(){
-        return player.getDefense();
     }
 
     public String getPlayerInventoryContent(){
         return player.getInventoryContent();
     }
 
+    public void setEventNotifier(Notifier notifier){
+        player.setNotifier(notifier);
+    }
+
+    public ActionResult startQuest(Quest quest){
+        return player.startQuest(quest);
+    }
+
+    public Player getPlayer(){
+        return player;
+    }
 }

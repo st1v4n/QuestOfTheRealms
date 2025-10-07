@@ -9,13 +9,7 @@ public class StartQuestCommand implements Command{
 
     @Override
     public ActionResult execute(GameModel model, GameView view){
-        String flag = view.requireUserInput();
-        try{
-            int index = Integer.parseInt(flag);
-            return model.startQuest(index);
-        }
-        catch(Exception e){
-            return new ActionResult(Status.ERROR, "Invalid index!");
-        }
+        String questName = view.requireUserInput();
+        return model.startQuest(questName);
     }
 }

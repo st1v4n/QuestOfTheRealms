@@ -10,10 +10,10 @@ public class StatsCommand implements Command{
     @Override
     public ActionResult execute(GameModel model, GameView view){
         return new ActionResult(Status.SUCCESS,
-                "Health: " + model.getPlayerHealth() + "\n" +
-                          "Mana: " + model.getPlayerMana() + "\n" +
-                          "Attack: " + model.getPlayerAttack() + "\n" +
-                          "Defense: " + model.getPlayerDefense() + "\n" +
+                "Health: " + model.getPlayer().getHealth() + "\n" +
+                          "Mana: " + model.getPlayer().getMana() + "\n" +
+                          "Attack: " + model.getPlayer().getAttack() + "\n" +
+                          "Defense: " + model.getPlayer().getDefense() + "\n" +
                           "Inventory: " + model.getPlayerInventoryContent() + "\n");
     }
 }

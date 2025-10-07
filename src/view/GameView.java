@@ -8,7 +8,7 @@ import view.visualisators.BaseVisualisator;
 
 import java.util.List;
 
-public class GameView implements Observable{
+public class GameView implements Observer {
 
     private final BaseVisualisator visualisator;
 
