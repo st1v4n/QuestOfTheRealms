@@ -26,12 +26,16 @@ public class DayUpdater extends Thread{
                 Thread.sleep(DAY_UPDATE_INTERVAL);
                 day.update();
                 if(day.isDay()){
+                    synchronized (player) {
                     notifier.notify(new ActionResult(Status.SUCCESS, "The sun has appeared, it seems that the day has started! (increasing player stats)"));
-                    player.increaseStats(PLAYER_STATS_MODIFIER);
+                        player.increaseStats(PLAYER_STATS_MODIFIER);
+                    }
                 }
                 else{
+                    synchronized (player) {
                     notifier.notify(new ActionResult(Status.SUCCESS, "The moon rose on the horizon and the night settled over the world! (decreasing player stats)"));
-                    player.decreaseStats(PLAYER_STATS_MODIFIER);
+                        player.decreaseStats(PLAYER_STATS_MODIFIER);
+                    }
                 }
             }
             catch(InterruptedException e){

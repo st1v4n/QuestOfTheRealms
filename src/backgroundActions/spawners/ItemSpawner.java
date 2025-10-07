@@ -52,14 +52,16 @@ public class ItemSpawner extends Thread{
         while(true){
             try{
                 Thread.sleep(ITEM_SPAWN_INTERVAL);
-                int row = 0;
-                int col = 0;
-                do{
-                    row = randomGenerator.nextInt(map.getYBorder());
-                    col = randomGenerator.nextInt(map.getXBorder());
-                }while(!map.isBlankPlace(row, col));
-                map.addItemAt(createItem(), row, col);
-                notifier.notify(new ActionResult(Status.SUCCESS, "Spawned new Item on the map! Row: " + row + " ; Col: " + col));
+                synchronized (map) {
+                    int row = 0;
+                    int col = 0;
+                    do {
+                        row = randomGenerator.nextInt(map.getYBorder());
+                        col = randomGenerator.nextInt(map.getXBorder());
+                    } while (!map.isBlankPlace(row, col));
+                    map.addItemAt(createItem(), row, col);
+                    notifier.notify(new ActionResult(Status.SUCCESS, "Spawned new Item on the map! Row: " + row + " ; Col: " + col));
+                }
             }
             catch(InterruptedException e){
                 notifier.notify(new ActionResult(Status.ERROR, "It seems like items dont want to spawn anymore..."));

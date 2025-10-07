@@ -8,6 +8,8 @@ public class CompletedQuestsCommand implements Command{
 
     @Override
     public ActionResult execute(GameModel model, GameView view){
-        return model.getCompletedQuests();
+        synchronized (model.getPlayer()) {
+            return model.getCompletedQuests();
+        }
     }
 }

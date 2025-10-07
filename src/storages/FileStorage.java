@@ -53,7 +53,6 @@ public class FileStorage{
     }
 
     public static ActionResult save(GameModel game, String filename) {
-        synchronized (game.map()) {
             try (FileWriter writer = new FileWriter(filename)) {
                 gson.toJson(game, writer);
                 System.out.println("Game saved to " + filename);
@@ -61,7 +60,6 @@ public class FileStorage{
                 return new ActionResult(Status.ERROR, "Could not save to file!");
             }
             return new ActionResult(Status.SUCCESS, "Saved successfully!");
-        }
     }
 
     public static GameModel load(GameView view, String filename) throws FileNotFoundException{

@@ -61,40 +61,39 @@ public class Player {
         return column;
     }
 
-    public synchronized void addHealth(int amount){
+    public void addHealth(int amount) {
         health += amount;
     }
 
-    public synchronized void addMana(int amount){
+    public void addMana(int amount) {
         mana += amount;
         checkForCompletedQuests();
     }
 
-    public synchronized void addAttack(int amount){
+    public void addAttack(int amount) {
         attack += amount;
     }
 
-    public synchronized void addDefense(int amount){
+    public void addDefense(int amount) {
         defense += amount;
         checkForCompletedQuests();
     }
 
-    public synchronized ActionResult attack(GameObject target){
-        if(mana < ClassConstants.MANA_REQUIRED_FOR_ATTACK){
+    public ActionResult attack(GameObject target) {
+        if (mana < ClassConstants.MANA_REQUIRED_FOR_ATTACK) {
             throw new IllegalStateException("Not enough mana!");
         }
         int amount = this.attack;
         ActionResult resultFromAttacking = target.sufferAttack(amount);
-        if(!resultFromAttacking.didFail()) { // ако реално сме ударили чудовище а не нещо друго
+        if (!resultFromAttacking.didFail()) { // ако реално сме ударили чудовище а не нещо друго
             defend(Integer.parseInt(resultFromAttacking.getDescription()));
             mana -= ClassConstants.MANA_REQUIRED_FOR_ATTACK;
             checkForCompletedQuests();
-            if(resultFromAttacking.didSucceedButNoUpdate()) {
+            if (resultFromAttacking.didSucceedButNoUpdate()) {
                 return new ActionResult(Status.SUCCESS_BUT_NO_UPDATE, "Attacked: " + target.getInfo());
-            }
-            else{
-                if(firstKilled == null) {
-                    firstKilled = (Enemy)target;
+            } else {
+                if (firstKilled == null) {
+                    firstKilled = (Enemy) target;
                     checkForCompletedQuests();
                 }
                 return new ActionResult(Status.SUCCESS, "Killed: " + target.toString());
@@ -103,76 +102,76 @@ public class Player {
         return resultFromAttacking;
     }
 
-    public synchronized void defend(int incomingDamage){
+    public  void defend(int incomingDamage) {
         int amount = incomingDamage - ClassConstants.DEFENSE_MULTIPLIER * defense;
         health -= amount;
-        if(health <= 0){
+        if (health <= 0) {
             //...
         }
     }
 
-    public void addItemToInventory(Item item){
+    public void addItemToInventory(Item item) {
         inventory.addItem(item);
     }
 
-    public void useItem(int index){
+    public void useItem(int index) {
         Item item = inventory.getItemAt(index);
-        if(item == null)throw new IllegalStateException("Invalid item!");
+        if (item == null) throw new IllegalStateException("Invalid item!");
         item.affect(this);
         inventory.removeItem(item);
     }
 
-    public void move(int row, int column){
+    public void move(int row, int column) {
         this.row = row;
         this.column = column;
     }
 
-    public String getPlayerClass(){
+    public String getPlayerClass() {
         return playerClass.value;
     }
 
-    public int getHealth(){
+    public int getHealth() {
         return health;
     }
 
-    public int getAttack(){
+    public int getAttack() {
         return attack;
     }
 
-    public int getMana(){
+    public int getMana() {
         return mana;
     }
 
-    public int getDefense(){
+    public int getDefense() {
         return defense;
     }
 
-    public String getInventoryContent(){
+    public String getInventoryContent() {
         return inventory.toString();
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Player";
     }
 
-    public String getInfo(){
+    public String getInfo() {
         return name + ": " + playerClass.value + " with " + health + " health remaining";
     }
 
-    public Enemy getFirstKilledEnemy(){
+    public Enemy getFirstKilledEnemy() {
         return firstKilled;
     }
 
-    public Set<String> getCompletedQuests(){
-        return Collections.unmodifiableSet(completedQuests);
+    public Set<String> getCompletedQuests() {
+        return new HashSet<>(completedQuests);
     }
 
-    public synchronized ActionResult startQuest(Quest quest){
-        if(startedQuests.contains(quest.getName())){
+    public ActionResult startQuest(Quest quest) {
+        if (startedQuests.contains(quest.getName())) {
             return new ActionResult(Status.ERROR, "Quest already started!");
         }
-        if(completedQuests.contains(quest.getName())){
+        if (completedQuests.contains(quest.getName())) {
             return new ActionResult(Status.ERROR, "Quest already completed!");
         }
         startedQuests.add(quest.getName());
@@ -180,10 +179,10 @@ public class Player {
         return new ActionResult(Status.SUCCESS, "Successfully started quest: " + quest.getDescription());
     }
 
-    private void checkForCompletedQuests(){
+    private synchronized void checkForCompletedQuests() {
         List<String> currently_completed = new ArrayList<>();
-        for(String questName : startedQuests){
-            if(QuestPool.getQuestByName(questName).isCompleted(this)){
+        for (String questName : startedQuests) {
+            if (QuestPool.getQuestByName(questName).isCompleted(this)) {
                 currently_completed.add(questName);
                 completedQuests.add(questName);
                 notifier.notify(new ActionResult(Status.SUCCESS, "Successfully completed quest: " + questName));
@@ -194,13 +193,13 @@ public class Player {
         }
     }
 
-    public synchronized void increaseStats(int modifier){
+    public void increaseStats(int modifier){
         this.attack *= modifier;
         this.defense *= modifier;
         checkForCompletedQuests();
     }
 
-    public synchronized void decreaseStats(int modifier){
+    public void decreaseStats(int modifier){
         this.attack /= modifier;
         this.defense /= modifier;
         checkForCompletedQuests();

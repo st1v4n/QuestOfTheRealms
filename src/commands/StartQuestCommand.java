@@ -9,7 +9,9 @@ public class StartQuestCommand implements Command{
 
     @Override
     public ActionResult execute(GameModel model, GameView view){
-        String questName = view.requireUserInput();
-        return model.startQuest(questName);
+        synchronized (model.getPlayer()) {
+            String questName = view.requireUserInput();
+            return model.startQuest(questName);
+        }
     }
 }

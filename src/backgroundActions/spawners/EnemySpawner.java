@@ -41,14 +41,16 @@ public class EnemySpawner extends Thread{
         while(true){
             try{
                 Thread.sleep(ENEMY_SPAWN_INTERVAL);
-                int row = 0;
-                int col = 0;
-                do{
-                    row = randomGenerator.nextInt(map.getYBorder());
-                    col = randomGenerator.nextInt(map.getXBorder());
-                }while(!map.isBlankPlace(row, col));
-                map.addEnemyAt(createEnemy(), row, col);
-                notifier.notify(new ActionResult(Status.SUCCESS, "Spawned new Enemy on the map! Row: " + row + " ; Col: " + col));
+                synchronized (map) {
+                    int row = 0;
+                    int col = 0;
+                    do {
+                        row = randomGenerator.nextInt(map.getYBorder());
+                        col = randomGenerator.nextInt(map.getXBorder());
+                    } while (!map.isBlankPlace(row, col));
+                    map.addEnemyAt(createEnemy(), row, col);
+                    notifier.notify(new ActionResult(Status.SUCCESS, "Spawned new Enemy on the map! Row: " + row + " ; Col: " + col));
+                }
             }
             catch(InterruptedException e){
                 notifier.notify(new ActionResult(Status.ERROR, "Enemies are scared of you and dont want to spawn anymore :D"));

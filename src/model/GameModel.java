@@ -78,7 +78,9 @@ public class GameModel {
         this.init(view);
     }
     public ActionResult movePlayer(int rowAddition, int columnAddition){
-        return map.movePlayer(rowAddition, columnAddition);
+        synchronized (map) {
+            return map.movePlayer(rowAddition, columnAddition);
+        }
     }
 
     public Player getPlayer(){
@@ -90,7 +92,9 @@ public class GameModel {
     }
 
     public ActionResult attackAt(int rowAddition, int colAddition){
-        return map.attackAt(rowAddition, colAddition);
+        synchronized (map) {
+            return map.attackAt(rowAddition, colAddition);
+        }
     }
 
     public ActionResult useItemAt(int index){
@@ -101,10 +105,6 @@ public class GameModel {
         Quest q = QuestPool.getQuestByName(questName);
         if(q == null)return new ActionResult(Status.ERROR, "Such quest does not exist!");
         return map.startQuest(q);
-    }
-
-    public String getAvailableQuestsInfo(){
-        return QuestPool.getAvailableQuestsInfo();
     }
 
     public ActionResult getCompletedQuests(){

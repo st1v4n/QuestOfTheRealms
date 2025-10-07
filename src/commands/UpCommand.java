@@ -8,6 +8,8 @@ public class UpCommand implements Command{
 
     @Override
     public ActionResult execute(GameModel model, GameView view){
-        return model.movePlayer(-1, 0);
+        synchronized (model.map()) {
+            return model.movePlayer(-1, 0);
+        }
     }
 }
