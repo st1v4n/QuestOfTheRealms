@@ -22,7 +22,7 @@ public class Main {
                 selection = Integer.parseInt(input);
             } catch (NumberFormatException e){
                 gameView.showMessage("That is not even a number... (Please, enter a number)");
-                selection = 0;
+                selection = Integer.MIN_VALUE;
             }
         } while(selection < intervalStart || selection > intervalEnd);
         return selection;
