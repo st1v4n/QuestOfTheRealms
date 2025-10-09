@@ -266,6 +266,71 @@
           "type": "blank"
         },
         {
+          "type": "potion",
+          "healthBoost": 64,
+          "manaBoost": 30
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "armor",
+          "defenseBoost": 5
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
           "type": "blank"
         },
         {
@@ -334,68 +399,6 @@
           "type": "wall"
         },
         {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "wall"
-        }
-      ],
-      [
-        {
-          "type": "wall"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "wall"
-        },
-        {
           "type": "wall"
         },
         {
@@ -473,7 +476,9 @@
           "type": "blank"
         },
         {
-          "type": "blank"
+          "type": "monster",
+          "health": 1200,
+          "attack": 220
         },
         {
           "type": "blank"
@@ -535,7 +540,8 @@
           "type": "blank"
         },
         {
-          "type": "blank"
+          "type": "armor",
+          "defenseBoost": 24
         },
         {
           "type": "blank"
@@ -752,7 +758,8 @@
           "type": "wall"
         },
         {
-          "type": "blank"
+          "type": "armor",
+          "defenseBoost": 23
         },
         {
           "type": "blank"
@@ -894,7 +901,9 @@
           "type": "blank"
         },
         {
-          "type": "blank"
+          "type": "bandit",
+          "health": 900,
+          "attack": 240
         },
         {
           "type": "blank"
@@ -1060,13 +1069,13 @@
     ],
     "player": {
       "name": "Ivan",
-      "health": 1200,
-      "mana": 220,
+      "health": 2200,
+      "mana": 360,
       "attack": 300,
       "defense": 50,
       "playerClass": "MAGE",
-      "row": 1,
-      "column": 2,
+      "row": 5,
+      "column": 15,
       "inventory": {
         "items": []
       },

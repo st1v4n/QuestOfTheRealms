@@ -1,5 +1,6 @@
 package backgroundActions.statsIncreasers;
 
+import locks.CustomLocks;
 import model.actionResults.ActionResult;
 import model.actionResults.Status;
 import model.notifiers.Notifier;
@@ -24,10 +25,15 @@ public class ManaStatIncreaser extends StatIncreaser{
         while(true){
             try{
                 Thread.sleep(MANA_INCREASE_INTERVAL);
-                increase();
             }
             catch(InterruptedException e){
                 notifier.notify(new ActionResult(Status.ERROR, "Mana generator failed! Try playing without mana :D"));
+            }
+            CustomLocks.modificationLock.readLock().lock();
+            try {
+                increase();
+            } finally {
+                CustomLocks.modificationLock.readLock().unlock();
             }
         }
     }

@@ -3,6 +3,7 @@ package storages;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import externalLibraries.RuntimeTypeAdapterFactory;
+import locks.CustomLocks;
 import model.GameModel;
 import model.actionResults.ActionResult;
 import model.actionResults.Status;
@@ -53,15 +54,15 @@ public class FileStorage{
     }
 
     public static ActionResult save(GameModel game, String filename) {
-        synchronized (game.map()) {
-            try (FileWriter writer = new FileWriter(filename)) {
-                gson.toJson(game, writer);
-                System.out.println("Game saved to " + filename);
-            } catch (IOException e) {
-                return new ActionResult(Status.ERROR, "Could not save to file!");
-            }
-            return new ActionResult(Status.SUCCESS, "Saved successfully!");
+        CustomLocks.modificationLock.writeLock().lock();
+        try (FileWriter writer = new FileWriter(filename)) {
+            gson.toJson(game, writer);
+        } catch (IOException e) {
+            return new ActionResult(Status.ERROR, "Could not save to file!");
+        } finally {
+            CustomLocks.modificationLock.writeLock().unlock();
         }
+        return new ActionResult(Status.SUCCESS, "Saved successfully!");
     }
 
     public static GameModel load(GameView view, String filename) throws FileNotFoundException{

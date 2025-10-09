@@ -1,5 +1,6 @@
 package backgroundActions.spawners;
 
+import locks.CustomLocks;
 import model.GameMap;
 import model.actionResults.ActionResult;
 import model.actionResults.Status;
@@ -41,20 +42,29 @@ public class EnemySpawner extends Thread{
         while(true){
             try{
                 Thread.sleep(ENEMY_SPAWN_INTERVAL);
-                synchronized (map) {
-                    int row = 0;
-                    int col = 0;
+            }
+            catch(InterruptedException e){
+                notifier.notify(new ActionResult(Status.ERROR, "Enemies are scared of you and dont want to spawn anymore :D"));
+                return;
+            }
+            // понеже не искаме да можем да правим промени по картата/играча докато запазваме във файл
+            // докато се играе нормално, си имаме и нормално конкурентно изпълнение на нишките
+            // но в момента, в който искаме да запазим картата
+            // искаме играта да ,,замръзне''
+            CustomLocks.modificationLock.readLock().lock();
+            try {
+                int row = 0;
+                int col = 0;
+                synchronized (map) { // за да подсигурим, че ако минат едновременно spawner на чудовища и предмети и изберат едно и също място, няма да има проблеми
                     do {
                         row = randomGenerator.nextInt(map.getYBorder());
                         col = randomGenerator.nextInt(map.getXBorder());
                     } while (!map.isBlankPlace(row, col));
                     map.addEnemyAt(createEnemy(), row, col);
-                    notifier.notify(new ActionResult(Status.SUCCESS, "Spawned new Enemy on the map! Row: " + row + " ; Col: " + col));
                 }
-            }
-            catch(InterruptedException e){
-                notifier.notify(new ActionResult(Status.ERROR, "Enemies are scared of you and dont want to spawn anymore :D"));
-                return;
+                notifier.notify(new ActionResult(Status.SUCCESS, "Spawned new Enemy on the map! Row: " + row + " ; Col: " + col));
+            } finally {
+                CustomLocks.modificationLock.readLock().unlock();
             }
         }
     }

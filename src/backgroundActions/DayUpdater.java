@@ -1,5 +1,6 @@
 package backgroundActions;
 
+import locks.CustomLocks;
 import model.actionResults.ActionResult;
 import model.actionResults.Status;
 import model.notifiers.Notifier;
@@ -22,21 +23,25 @@ public class DayUpdater extends Thread{
     @Override
     public void run(){
         while(true){
-            try{
+            try {
                 Thread.sleep(DAY_UPDATE_INTERVAL);
-                day.update();
-                if(day.isDay()){
-                    notifier.notify(new ActionResult(Status.SUCCESS, "The sun has appeared, it seems that the day has started! (increasing player stats)"));
-                    player.increaseStats(PLAYER_STATS_MODIFIER);
-                }
-                else{
-                    notifier.notify(new ActionResult(Status.SUCCESS, "The moon rose on the horizon and the night settled over the world! (decreasing player stats)"));
-                    player.decreaseStats(PLAYER_STATS_MODIFIER);
-                }
             }
             catch(InterruptedException e){
                 notifier.notify(new ActionResult(Status.ERROR, "The planet stopped moving and you will be permanently stuck in either Day/Night!"));
                 return;
+            }
+            CustomLocks.modificationLock.readLock().lock();
+            try {
+                day.update();
+                if (day.isDay()) {
+                    notifier.notify(new ActionResult(Status.SUCCESS, "The sun has appeared, it seems that the day has started! (increasing player stats)"));
+                    player.increaseStats(PLAYER_STATS_MODIFIER);
+                } else {
+                    notifier.notify(new ActionResult(Status.SUCCESS, "The moon rose on the horizon and the night settled over the world! (decreasing player stats)"));
+                    player.decreaseStats(PLAYER_STATS_MODIFIER);
+                }
+            } finally {
+                CustomLocks.modificationLock.readLock().unlock();
             }
         }
     }

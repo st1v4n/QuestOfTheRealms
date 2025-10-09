@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 
 public class Main {
 
-    private static final String mapFileName = "src/view/mainMap.txt";
+    public static final String mapFileName = "src/view/mainMap.txt";
 
     public static void main(String[] args) {
         GameView gameView = new GameView(new ConsoleVisualisator());

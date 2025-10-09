@@ -1,6 +1,7 @@
 package controller;
 
 import commands.Command;
+import locks.CustomLocks;
 import model.GameModel;
 import view.GameView;
 
@@ -20,8 +21,13 @@ public class GameController {
         if(command == null){
             view.showMessage("Invalid command! Use the help command to see all available commands!");
         }
-        else{
-            view.update(command.execute(model, view));
+        else {
+            CustomLocks.modificationLock.readLock().lock();
+            try {
+                view.update(command.execute(model, view));
+            } finally {
+                CustomLocks.modificationLock.readLock().unlock();
+            }
         }
     }
 

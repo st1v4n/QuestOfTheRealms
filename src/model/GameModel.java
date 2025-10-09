@@ -2,6 +2,8 @@ package model;
 
 import backgroundActions.Day;
 import backgroundActions.DayUpdater;
+import backgroundActions.autoSavers.BaseAutoSaver;
+import backgroundActions.autoSavers.JsonAutoSaver;
 import backgroundActions.quests.Quest;
 import backgroundActions.spawners.EnemySpawner;
 import backgroundActions.spawners.ItemSpawner;
@@ -48,6 +50,7 @@ public class GameModel {
     private transient EnemySpawner enemySpawner;
     private transient HealthStatIncreaser healthStatIncreaser;
     private transient ManaStatIncreaser manaStatIncreaser;
+    private transient BaseAutoSaver autoSaver;
 
     public void init(GameView view){
         notifier = new Notifier();
@@ -63,6 +66,8 @@ public class GameModel {
         healthStatIncreaser.start();
         manaStatIncreaser = new ManaStatIncreaser(map.getPlayer(), notifier);
         manaStatIncreaser.start();
+        autoSaver = new JsonAutoSaver(notifier, this);
+        autoSaver.start();
     }
 
     public GameModel(GameView view, String mapFileName){
