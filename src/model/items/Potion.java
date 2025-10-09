@@ -31,7 +31,8 @@ public class Potion extends Item{
         return "Potion";
     }
 
-    public String getInfo(){
+    @Override
+    public String getSpecificInformation(){
         return "Potion with " + healthBoost + " health boost and " + manaBoost + " mana boost";
     }
 }

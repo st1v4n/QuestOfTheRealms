@@ -64,6 +64,7 @@ public class Main {
             gameView.showMessage("Something unexpected happened, can't play right now!");
             System.exit(0);
         }
+        gameView.showMessage("Welcome! Type help to see available commands!");
         GameController gameController = new GameController(gameModel, gameView);
         while (true) {
             try {

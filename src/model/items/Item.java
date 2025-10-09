@@ -14,14 +14,15 @@ public abstract class Item implements GameObject {
         return "Item";
     }
 
-    public abstract String getInfo();
+    @Override
+    public abstract String getSpecificInformation();
 
     @Override
     public ActionResult sufferMovement(){
-        return new ActionResult(Status.SUCCESS, "You picked up an item: " + this.getInfo());
+        return new ActionResult(Status.ITEM_PICKED, this);
     }
     @Override
     public ActionResult sufferAttack(int amount){
-        return new ActionResult(Status.ERROR, "You tried to attack an item!");
+        return new ActionResult(Status.ITEM_ATTACKED, this);
     }
 }

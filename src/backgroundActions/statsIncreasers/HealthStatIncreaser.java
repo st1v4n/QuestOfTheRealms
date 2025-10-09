@@ -1,18 +1,16 @@
 package backgroundActions.statsIncreasers;
 
 import locks.CustomLocks;
-import model.actionResults.ActionResult;
-import model.actionResults.Status;
-import model.notifiers.Notifier;
 import model.playerClasses.Player;
+import view.GameView;
 
 public class HealthStatIncreaser extends StatIncreaser{
 
     private static final int HEALTH_INCREASE_AMOUNT = 100;
     private static final int HEALTH_INCREASE_INTERVAL = 10000;
 
-    public HealthStatIncreaser(Player player, Notifier notifier){
-        super(HEALTH_INCREASE_AMOUNT, player, notifier);
+    public HealthStatIncreaser(Player player, GameView view){
+        super(HEALTH_INCREASE_AMOUNT, player, view);
     }
 
     @Override
@@ -27,7 +25,7 @@ public class HealthStatIncreaser extends StatIncreaser{
                 Thread.sleep(HEALTH_INCREASE_INTERVAL);
             }
             catch(InterruptedException e){
-                notifier.notify(new ActionResult(Status.ERROR, "Health generator failed! Try playing without mana :D"));
+                view.showMessage("Health generator failed! Try playing without health :D");
             }
             CustomLocks.modificationLock.readLock().lock();
             try {

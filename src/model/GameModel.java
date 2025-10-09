@@ -1,17 +1,8 @@
 package model;
 
-import backgroundActions.Day;
-import backgroundActions.DayUpdater;
-import backgroundActions.autoSavers.BaseAutoSaver;
-import backgroundActions.autoSavers.JsonAutoSaver;
 import backgroundActions.quests.Quest;
-import backgroundActions.spawners.EnemySpawner;
-import backgroundActions.spawners.ItemSpawner;
 import backgroundActions.quests.QuestPool;
-import backgroundActions.statsIncreasers.HealthStatIncreaser;
-import backgroundActions.statsIncreasers.ManaStatIncreaser;
-import model.actionResults.ActionResult;
-import model.actionResults.Status;
+import model.enemy.Boss;
 import model.mapGenerators.BaseMapGenerator;
 import model.mapGenerators.MapGenerator;
 import model.notifiers.Notifier;
@@ -44,73 +35,50 @@ public class GameModel {
      */
 
     private GameMap map;
-    private Day daytimer;
     private transient Notifier notifier;
     private transient BaseMapGenerator mapGenerator;
-    private transient ItemSpawner itemSpawner;
-    private transient EnemySpawner enemySpawner;
-    private transient HealthStatIncreaser healthStatIncreaser;
-    private transient ManaStatIncreaser manaStatIncreaser;
-    private transient BaseAutoSaver autoSaver;
 
     public void init(GameView view){
         notifier = new Notifier();
         notifier.addObserver(view);
         map.setEventNotifier(notifier);
-        DayUpdater dayUpdater = new DayUpdater(daytimer, notifier, map.getPlayer());
-        dayUpdater.start();
-        itemSpawner = new ItemSpawner(map, notifier);
-        itemSpawner.start();
-        enemySpawner = new EnemySpawner(map, notifier);
-        enemySpawner.start();
-        healthStatIncreaser = new HealthStatIncreaser(map.getPlayer(), notifier);
-        healthStatIncreaser.start();
-        manaStatIncreaser = new ManaStatIncreaser(map.getPlayer(), notifier);
-        manaStatIncreaser.start();
-        autoSaver = new JsonAutoSaver(notifier, this);
-        autoSaver.start();
     }
 
     public GameModel(GameView view, String mapFileName, PlayerClass playerClass){
-        daytimer = new Day();
         mapGenerator = new MapGenerator();
         try {
             map = mapGenerator.generateMapFromFile(mapFileName, playerClass);
+            this.init(view);
+            map.addEnemyAt(new Boss(), 11, 11);
         }
         catch(InputMismatchException inputMismatchException){
-            notifier.notify(new ActionResult(Status.ERROR, inputMismatchException.getMessage()));
             System.exit(-1);
         }
-        this.init(view);
     }
-    public ActionResult movePlayer(int rowAddition, int columnAddition){
-            return map.movePlayer(rowAddition, columnAddition);
+    public void movePlayer(int rowAddition, int columnAddition){
+            map.movePlayer(rowAddition, columnAddition);
     }
 
     public Player getPlayer(){
         return map.getPlayer();
     }
 
-    public String getPlayerInventoryContent(){
-        return map.getPlayerInventoryContent();
+    public void attackAt(int rowAddition, int colAddition){
+            map.attackAt(rowAddition, colAddition);
     }
 
-    public ActionResult attackAt(int rowAddition, int colAddition){
-            return map.attackAt(rowAddition, colAddition);
+    public void useItemAt(int index){
+        map.useItemAt(index);
     }
 
-    public ActionResult useItemAt(int index){
-        return map.useItemAt(index);
-    }
-
-    public ActionResult startQuest(String questName){
+    public void startQuest(String questName){
         Quest q = QuestPool.getQuestByName(questName);
-        if(q == null)return new ActionResult(Status.ERROR, "Such quest does not exist!");
-        return map.startQuest(q);
+        if(q == null)return;
+        map.startQuest(q);
     }
 
-    public ActionResult getCompletedQuests(){
-        return map.getCompletedQuests();
+    public String getCompletedQuestsInfo(){
+        return map.getCompletedQuestsInfo();
     }
 
     public GameMap map(){
@@ -118,4 +86,5 @@ public class GameModel {
             return this.map;
         }
     }
+
 }

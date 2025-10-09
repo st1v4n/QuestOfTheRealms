@@ -4,6 +4,7 @@ import backgroundActions.quests.Quest;
 import backgroundActions.quests.QuestPool;
 import model.actionResults.ActionResult;
 import model.actionResults.Status;
+import model.gameObjects.Entity;
 import model.gameObjects.GameObject;
 import model.items.Item;
 import model.enemy.Enemy;
@@ -13,7 +14,7 @@ import model.notifiers.Notifier;
 import java.util.*;
 
 
-public class Player {
+public class Player implements Entity {
     private final String name;
     private int health;
     private int mana;
@@ -85,18 +86,15 @@ public class Player {
         }
         int amount = this.attack;
         ActionResult resultFromAttacking = target.sufferAttack(amount);
-        if (!resultFromAttacking.didFail()) { // ако реално сме ударили чудовище а не нещо друго
-            defend(Integer.parseInt(resultFromAttacking.getDescription()));
+        if (resultFromAttacking.isTargetEnemy()) { // ако реално сме ударили чудовище а не нещо друго
+            defend(Integer.parseInt(resultFromAttacking.getEntity().toString()));
             mana -= ClassConstants.MANA_REQUIRED_FOR_ATTACK;
             checkForCompletedQuests();
-            if (resultFromAttacking.didSucceedButNoUpdate()) {
-                return new ActionResult(Status.SUCCESS_BUT_NO_UPDATE, "Attacked: " + target.getInfo());
-            } else {
+            if (resultFromAttacking.getStatus().equals(Status.KILLED_ENEMY)) {
                 if (firstKilled == null) {
                     firstKilled = (Enemy) target;
                     checkForCompletedQuests();
                 }
-                return new ActionResult(Status.SUCCESS, "Killed: " + target.toString());
             }
         }
         return resultFromAttacking;
@@ -106,7 +104,7 @@ public class Player {
         int amount = incomingDamage - ClassConstants.DEFENSE_MULTIPLIER * defense;
         health -= amount;
         if (health <= 0) {
-            //...
+            System.exit(0);
         }
     }
 
@@ -114,11 +112,12 @@ public class Player {
         inventory.addItem(item);
     }
 
-    public synchronized void useItem(int index) {
+    public synchronized Item useItem(int index) {
         Item item = inventory.getItemAt(index);
         if (item == null) throw new IllegalStateException("Invalid item!");
         item.affect(this);
         inventory.removeItem(item);
+        return item;
     }
 
     public synchronized void move(int row, int column) {
@@ -155,10 +154,6 @@ public class Player {
         return "Player";
     }
 
-    public synchronized String getInfo() {
-        return name + ": " + playerClass.value + " with " + health + " health remaining";
-    }
-
     public Enemy getFirstKilledEnemy() {
         return firstKilled;
     }
@@ -169,14 +164,14 @@ public class Player {
 
     public synchronized ActionResult startQuest(Quest quest) {
         if (startedQuests.contains(quest.getName())) {
-            return new ActionResult(Status.ERROR, "Quest already started!");
+            return new ActionResult(Status.QUEST_ALREADY_STARTED, quest);
         }
         if (completedQuests.contains(quest.getName())) {
-            return new ActionResult(Status.ERROR, "Quest already completed!");
+            return new ActionResult(Status.QUEST_ALREADY_COMPLETED, quest);
         }
         startedQuests.add(quest.getName());
         checkForCompletedQuests(); // ако е завършен преди да е добавен
-        return new ActionResult(Status.SUCCESS, "Successfully started quest: " + quest.getDescription());
+        return new ActionResult(Status.STARTED_QUEST, quest);
     }
 
     private synchronized void checkForCompletedQuests() {
@@ -185,7 +180,7 @@ public class Player {
             if (QuestPool.getQuestByName(questName).isCompleted(this)) {
                 currently_completed.add(questName);
                 completedQuests.add(questName);
-                notifier.notify(new ActionResult(Status.SUCCESS, "Successfully completed quest: " + questName));
+                notifier.notify(new ActionResult(Status.COMPLETED_QUEST, QuestPool.getQuestByName(questName)));
             }
         }
         for(String questName : currently_completed){
@@ -207,5 +202,18 @@ public class Player {
 
     public void setNotifier(Notifier notifier){
         this.notifier = notifier;
+    }
+
+    @Override
+    public synchronized String getSpecificInformation(){
+        return "Health: " + health + "\n" +
+                "Mana: " + mana + "\n" +
+                "Attack: " + attack + "\n" +
+                "Defense: " + defense + "\n" +
+                "Inventory: " + getInventoryContent();
+    }
+
+    public void showStats(){
+        notifier.notify(new ActionResult(Status.PLAYER_STATS_SHOWN, this));
     }
 }

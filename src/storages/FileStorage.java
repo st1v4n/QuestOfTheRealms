@@ -59,11 +59,11 @@ public class FileStorage implements BaseStorage{
         try (FileWriter writer = new FileWriter(filename)) {
             gson.toJson(game, writer);
         } catch (IOException e) {
-            return new ActionResult(Status.ERROR, "Could not save to file!");
+            return new ActionResult(Status.ERROR_WHILE_SAVING,null);
         } finally {
             CustomLocks.modificationLock.writeLock().unlock();
         }
-        return new ActionResult(Status.SUCCESS, "Saved successfully!");
+        return new ActionResult(Status.GAME_SAVED, null);
     }
 
     @Override

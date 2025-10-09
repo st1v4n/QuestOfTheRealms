@@ -25,7 +25,8 @@ public class Weapon extends Item{
         return "Weapon";
     }
 
-    public String getInfo(){
+    @Override
+    public String getSpecificInformation(){
         return "Weapon with " + attackBoost + " attack boost";
     }
 

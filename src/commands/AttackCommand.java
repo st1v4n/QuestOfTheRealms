@@ -1,26 +1,24 @@
 package commands;
 
 import model.GameModel;
-import model.actionResults.ActionResult;
-import model.actionResults.Status;
 import view.GameView;
 
 public class AttackCommand implements Command{
 
     @Override
-    public ActionResult execute(GameModel model, GameView view){
+    public void execute(GameModel model, GameView view){
         String flag = view.requireUserInput();
         switch (flag) {
             case "up":
-                return model.attackAt(-1, 0);
+                model.attackAt(-1, 0);break;
             case "down":
-                return model.attackAt(1, 0);
+                model.attackAt(1, 0);break;
             case "right":
-                return model.attackAt(0, 1);
+                model.attackAt(0, 1);break;
             case "left":
-                return model.attackAt(0, -1);
+                model.attackAt(0, -1);break;
             default:
-                return new ActionResult(Status.ERROR, "Invalid direction!");
+                view.showMessage("invalid direction");
         }
     }
 }

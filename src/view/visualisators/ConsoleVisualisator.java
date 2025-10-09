@@ -35,7 +35,6 @@ public class ConsoleVisualisator implements BaseVisualisator{
 
     @Override
     public Command getCommand(){
-        System.out.print("Enter a command: ");
         String commandName;
         commandName = scan.next();
         return factory.create(commandName);
@@ -64,7 +63,10 @@ public class ConsoleVisualisator implements BaseVisualisator{
 
     @Override
     public void notify(ActionResult result){
-        System.out.println(result.getDescription());
+        System.out.println(result.getStatus().value);
+        if(result.getEntity() != null){
+            System.out.println(result.getEntity().getSpecificInformation());
+        }
     }
 
     @Override

@@ -1,19 +1,18 @@
 package backgroundActions.statsIncreasers;
 
-import model.GameMap;
-import model.notifiers.Notifier;
 import model.playerClasses.Player;
+import view.GameView;
 
 public abstract class StatIncreaser extends Thread{
 
     protected final int amount;
-    protected final Notifier notifier;
+    protected final GameView view;
     protected final Player player;
 
-    public StatIncreaser(int amount, Player player, Notifier notifier){
+    public StatIncreaser(int amount, Player player, GameView view){
         this.amount = amount;
         this.player = player;
-        this.notifier = notifier;
+        this.view = view;
     }
 
     public abstract void increase();

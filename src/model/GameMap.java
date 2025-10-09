@@ -20,6 +20,7 @@ public class GameMap {
 
     private List<List<GameObject>> map;
     private final Player player;
+    private transient Notifier notifier;
 
     public GameMap(List<List<GameObject>> map, Player player){
         this.map = map;
@@ -46,29 +47,29 @@ public class GameMap {
         return map.get(row).get(col).getClass().equals(Blank.class);
     }
 
-    public synchronized ActionResult addEnemyAt(Enemy enemy, int row, int col) {
+    public synchronized void addEnemyAt(Enemy enemy, int row, int col) {
         if (!isBlankPlace(row, col) || (row == player.getRow() && col == player.getColumn())) {
-            return new ActionResult(Status.ERROR, "Tried to spawn enemy on top of a game object...(mission failed successfully)");
+            notifier.notify(new ActionResult(Status.WRONG_SPAWN, enemy));
         }
         map.get(row).set(col, enemy);
-        return new ActionResult(Status.SUCCESS, "Successfully added enemy!");
+        notifier.notify(new ActionResult(Status.SPAWNED_ENEMY, enemy));
     }
 
-    public synchronized ActionResult addItemAt(Item item, int row, int col) {
+    public synchronized void addItemAt(Item item, int row, int col) {
         if (!isBlankPlace(row, col) || (row == player.getRow() && col == player.getColumn())) {
-            return new ActionResult(Status.ERROR, "Tried to spawn item on top of a game object...(mission failed successfully)");
+            notifier.notify(new ActionResult(Status.WRONG_SPAWN, item));
         }
         map.get(row).set(col, item);
-        return new ActionResult(Status.SUCCESS, "Successfully added item!");
+        notifier.notify(new ActionResult(Status.SPAWNED_ITEM, item));
     }
 
     // функциите move и attack са разделени!
-    public synchronized ActionResult movePlayer(int rowAddition, int colAddition) {
+    public synchronized void movePlayer(int rowAddition, int colAddition) {
         int potentialRow = player.getRow() + rowAddition;
         int potentialCol = player.getColumn() + colAddition;
         GameObject objectAtPosition = map.get(potentialRow).get(potentialCol);
         ActionResult action = objectAtPosition.sufferMovement();
-        if (action.didSucceed()) {
+        if (action.isMovementSuccessful()) {
             try {
                 player.addItemToInventory((Item) objectAtPosition);
             } catch (Exception e) {
@@ -76,50 +77,47 @@ public class GameMap {
             map.get(potentialRow).set(potentialCol, new Blank());
             player.move(potentialRow, potentialCol);
         }
-        return action;
+        notifier.notify(action);
     }
 
     // функциите move и attack са разделени!
-    public synchronized ActionResult attackAt(int rowAddition, int colAddition) {
+    public synchronized void attackAt(int rowAddition, int colAddition) {
         int potentialRow = player.getRow() + rowAddition;
         int potentialCol = player.getColumn() + colAddition;
         ActionResult action = player.attack(map.get(potentialRow).get(potentialCol));
-        if (action.didSucceed()) {
+        if (action.getStatus().equals(Status.KILLED_ENEMY)) {
             map.get(potentialRow).set(potentialCol, new Blank());
         }
-        return action;
+        notifier.notify(action);
     }
 
-    public ActionResult useItemAt(int index) {
+    public void useItemAt(int index) {
         try {
-            player.useItem(index);
+            Item usedItem = player.useItem(index);
+            notifier.notify(new ActionResult(Status.ITEM_USED, usedItem));
         } catch (IllegalStateException illegalExc) {
-            return new ActionResult(Status.ERROR, "You do not have this item!");
+            notifier.notify(new ActionResult(Status.ITEM_NOT_OWNED, null));
         } catch (ArrayIndexOutOfBoundsException indexOutExc) {
-            return new ActionResult(Status.ERROR, "Invalid item index!");
+            notifier.notify(new ActionResult(Status.ITEM_INDEX_OUT_OF_RANGE, null));
         }
-        return new ActionResult(Status.SUCCESS, "Successfully used the item!");
     }
 
-    public ActionResult getCompletedQuests() {
+    public String getCompletedQuestsInfo() {
         StringBuilder sb = new StringBuilder();
         Set<String> completedQuests = player.getCompletedQuests();
         for (String questName : completedQuests) {
             sb.append(questName + "\n");
         }
-        return new ActionResult(Status.SUCCESS, sb.toString());
-    }
-
-    public String getPlayerInventoryContent() {
-        return player.getInventoryContent();
+        return sb.toString();
     }
 
     public void setEventNotifier(Notifier notifier){
+        this.notifier = notifier;
         player.setNotifier(notifier);
     }
 
-    public ActionResult startQuest(Quest quest) {
-        return player.startQuest(quest);
+    public void startQuest(Quest quest) {
+        notifier.notify(player.startQuest(quest));
     }
 
     public Player getPlayer(){

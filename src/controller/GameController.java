@@ -1,5 +1,13 @@
 package controller;
 
+import backgroundActions.Day;
+import backgroundActions.DayUpdater;
+import backgroundActions.autoSavers.BaseAutoSaver;
+import backgroundActions.autoSavers.JsonAutoSaver;
+import backgroundActions.spawners.EnemySpawner;
+import backgroundActions.spawners.ItemSpawner;
+import backgroundActions.statsIncreasers.HealthStatIncreaser;
+import backgroundActions.statsIncreasers.ManaStatIncreaser;
 import commands.Command;
 import locks.CustomLocks;
 import model.GameModel;
@@ -10,10 +18,29 @@ public class GameController {
 
     private final GameModel model;
     private final GameView view;
+    private final ItemSpawner itemSpawner;
+    private final EnemySpawner enemySpawner;
+    private final HealthStatIncreaser healthStatIncreaser;
+    private final ManaStatIncreaser manaStatIncreaser;
+    private final BaseAutoSaver autoSaver;
+    private Day daytimer;
 
     public GameController(GameModel model, GameView view){
         this.model = model;
         this.view = view;
+        daytimer = new Day();
+        DayUpdater dayUpdater = new DayUpdater(daytimer, view, model.getPlayer());
+        dayUpdater.start();
+        itemSpawner = new ItemSpawner(model.map(), view);
+        itemSpawner.start();
+        enemySpawner = new EnemySpawner(model.map(), view);
+        enemySpawner.start();
+        healthStatIncreaser = new HealthStatIncreaser(model.getPlayer(), view);
+        healthStatIncreaser.start();
+        manaStatIncreaser = new ManaStatIncreaser(model.getPlayer(), view);
+        manaStatIncreaser.start();
+        autoSaver = new JsonAutoSaver(view, model);
+        autoSaver.start();
     }
 
     public void generateCommand(){
@@ -24,7 +51,7 @@ public class GameController {
         else {
             CustomLocks.modificationLock.readLock().lock();
             try {
-                view.update(command.execute(model, view));
+                command.execute(model, view);
             } finally {
                 CustomLocks.modificationLock.readLock().unlock();
             }

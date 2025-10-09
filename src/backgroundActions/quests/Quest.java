@@ -1,10 +1,11 @@
 package backgroundActions.quests;
+import model.gameObjects.Entity;
 import model.playerClasses.Player;
 
 import java.util.Objects;
 import java.util.function.Function;
 
-public class Quest{
+public class Quest implements Entity {
 
 
     private final String description;
@@ -42,4 +43,8 @@ public class Quest{
         return Objects.hash(description);
     }
 
+    @Override
+    public String getSpecificInformation(){
+        return getDescription();
+    }
 }

@@ -20,11 +20,11 @@ public class GameView implements Observer {
         return visualisator.getCommand();
     }
 
-    public void showMessage(String message){
+    public synchronized void showMessage(String message){
         visualisator.showMessage(message);
     }
 
-    public void showMap(List<List<GameObject>> map, Player player){
+    public synchronized void showMap(List<List<GameObject>> map, Player player){
         visualisator.showMap(map, player);
     }
 
@@ -33,7 +33,7 @@ public class GameView implements Observer {
         visualisator.notify(result);
     }
 
-    public String requireUserInput(){
+    public synchronized String requireUserInput(){
         return visualisator.requireUserInput();
     }
 

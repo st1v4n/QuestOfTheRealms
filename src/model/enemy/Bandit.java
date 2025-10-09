@@ -14,7 +14,8 @@ public class Bandit extends Enemy{
         return "Bandit";
     }
 
-    public String getInfo(){
-        return "Bandit" + super.getInfo();
+    @Override
+    public String getSpecificInformation(){
+        return "Bandit" + super.getSpecificInformation();
     }
 }

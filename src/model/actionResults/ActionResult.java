@@ -1,31 +1,30 @@
 package model.actionResults;
 
+import model.gameObjects.Entity;
+
 public class ActionResult {
     private final Status status;
-    private final String description;
+    private final Entity entity;
 
-    public ActionResult(Status status, String description){
+    public ActionResult(Status status, Entity entity){
         this.status = status;
-        this.description = description;
+        this.entity = entity;
     }
 
     public Status getStatus(){
         return status;
     }
 
-    public String getDescription(){
-        return description;
+    public Entity getEntity(){
+        return entity;
     }
 
-    public boolean didFail(){
-        return status.equals(Status.ERROR);
+    public boolean isTargetEnemy(){
+        return status.equals(Status.ATTACKED_ENEMY) || status.equals(Status.KILLED_ENEMY);
     }
 
-    public boolean didSucceed(){
-        return status.equals(Status.SUCCESS);
+    public boolean isMovementSuccessful(){
+        return status.equals(Status.MOVED) || status.equals(Status.ITEM_PICKED);
     }
 
-    public boolean didSucceedButNoUpdate(){
-        return status.equals(Status.SUCCESS_BUT_NO_UPDATE);
-    }
 }

@@ -14,7 +14,7 @@ public class Monster extends Enemy{
         return "Monster";
     }
 
-    public String getInfo(){
-        return "Monster" + super.getInfo();
+    public String getSpecificInformation(){
+        return "Monster" + super.getSpecificInformation();
     }
 }

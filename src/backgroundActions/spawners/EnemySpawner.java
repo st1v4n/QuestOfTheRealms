@@ -2,25 +2,23 @@ package backgroundActions.spawners;
 
 import locks.CustomLocks;
 import model.GameMap;
-import model.actionResults.ActionResult;
-import model.actionResults.Status;
 import model.enemy.Bandit;
 import model.enemy.Enemy;
 import model.enemy.Monster;
-import model.notifiers.Notifier;
+import view.GameView;
 
 import java.util.Random;
 
 public class EnemySpawner extends Thread{
 
     private final GameMap map;
-    private final Notifier notifier;
+    private final GameView view;
     private final Random randomGenerator;
     private static final int ENEMY_SPAWN_INTERVAL = 30000;
 
-    public EnemySpawner(GameMap map, Notifier notifier){
+    public EnemySpawner(GameMap map, GameView view){
         this.map = map;
-        this.notifier = notifier;
+        this.view = view;
         this.randomGenerator = new Random();
     }
 
@@ -44,7 +42,7 @@ public class EnemySpawner extends Thread{
                 Thread.sleep(ENEMY_SPAWN_INTERVAL);
             }
             catch(InterruptedException e){
-                notifier.notify(new ActionResult(Status.ERROR, "Enemies are scared of you and dont want to spawn anymore :D"));
+                view.showMessage("Enemies are scared of you and dont want to spawn anymore :D");
                 return;
             }
             // понеже не искаме да можем да правим промени по картата/играча докато запазваме във файл
@@ -62,7 +60,6 @@ public class EnemySpawner extends Thread{
                     } while (!map.isBlankPlace(row, col));
                     map.addEnemyAt(createEnemy(), row, col);
                 }
-                notifier.notify(new ActionResult(Status.SUCCESS, "Spawned new Enemy on the map! Row: " + row + " ; Col: " + col));
             } finally {
                 CustomLocks.modificationLock.readLock().unlock();
             }

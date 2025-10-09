@@ -54,7 +54,6 @@ public class MapGenerator implements BaseMapGenerator{
             if(isValid(map)){
                 Player player = new Player("Player1", playerClass);
                 GameMap resultMap = new GameMap(map, player);
-                resultMap.addEnemyAt(new Boss(), 11, 11);
                 return resultMap;
             }
             else{

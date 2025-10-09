@@ -2,20 +2,18 @@ package backgroundActions.spawners;
 
 import locks.CustomLocks;
 import model.GameMap;
-import model.actionResults.ActionResult;
-import model.actionResults.Status;
 import model.items.Armor;
 import model.items.Item;
 import model.items.Potion;
 import model.items.Weapon;
-import model.notifiers.Notifier;
+import view.GameView;
 
 import java.util.Random;
 
 public class ItemSpawner extends Thread{
 
     private final GameMap map;
-    private final Notifier notifier;
+    private final GameView view;
     private final Random randomGenerator;
     private static final int ITEM_SPAWN_INTERVAL = 25000;
     private static final int HEALTH_BOOST_CAP = 100;
@@ -23,9 +21,9 @@ public class ItemSpawner extends Thread{
     private static final int ATTACK_BOOST_CAP = 30;
     private static final int DEFENSE_BOOST_CAP = 25;
 
-    public ItemSpawner(GameMap map, Notifier notifier){
+    public ItemSpawner(GameMap map, GameView view){
         this.map = map;
-        this.notifier = notifier;
+        this.view = view;
         this.randomGenerator = new Random();
     }
 
@@ -55,7 +53,7 @@ public class ItemSpawner extends Thread{
                 Thread.sleep(ITEM_SPAWN_INTERVAL);
             }
             catch(InterruptedException e){
-                notifier.notify(new ActionResult(Status.ERROR, "It seems like items dont want to spawn anymore..."));
+                view.showMessage("It seems like items dont want to spawn anymore...");
                 return;
             }
             CustomLocks.modificationLock.readLock().lock();
@@ -69,7 +67,6 @@ public class ItemSpawner extends Thread{
                     } while (!map.isBlankPlace(row, col));
                     map.addItemAt(createItem(), row, col);
                 }
-                notifier.notify(new ActionResult(Status.SUCCESS, "Spawned new Item on the map! Row: " + row + " ; Col: " + col));
             } finally {
                 CustomLocks.modificationLock.readLock().unlock();
             }

@@ -33,7 +33,7 @@ public class Inventory {
         if(items.isEmpty())return "Inventory is Empty!";
         String result = "";
         for(int i=0;i<items.size();++i){
-            result += "index " + i + ": " + items.get(i).getInfo() + "\n";
+            result += "index " + i + ": " + items.get(i).getSpecificInformation() + "\n";
         }
         return result;
     }
