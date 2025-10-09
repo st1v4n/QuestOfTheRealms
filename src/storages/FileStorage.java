@@ -29,11 +29,11 @@ import java.io.IOException;
 //Не съм работил с Gson досега, възможно е да има бъгове
 //Класът FileStorage не е писан изцяло със мой знания, но пък поне разбирам какво прави
 //Всичко останало във проекта е 100% писано от мен ;)
-public class FileStorage{
+public class FileStorage implements BaseStorage{
 
-    private static final Gson gson;
+    private final Gson gson;
 
-    static{
+    public FileStorage(){
         RuntimeTypeAdapterFactory<GameObject> gameObjectAdapter =
                 RuntimeTypeAdapterFactory.of(GameObject.class, "type")
                         .registerSubtype(Enemy.class, "enemy")
@@ -53,7 +53,8 @@ public class FileStorage{
                 .create();
     }
 
-    public static ActionResult save(GameModel game, String filename) {
+    @Override
+    public ActionResult save(GameModel game, String filename) {
         CustomLocks.modificationLock.writeLock().lock();
         try (FileWriter writer = new FileWriter(filename)) {
             gson.toJson(game, writer);
@@ -65,7 +66,8 @@ public class FileStorage{
         return new ActionResult(Status.SUCCESS, "Saved successfully!");
     }
 
-    public static GameModel load(GameView view, String filename) throws FileNotFoundException{
+    @Override
+    public GameModel load(GameView view, String filename) throws FileNotFoundException{
         try (FileReader reader = new FileReader(filename)) {
             GameModel model = gson.fromJson(reader, GameModel.class);
             if(model == null)throw new FileNotFoundException("Game was not properly saved!");

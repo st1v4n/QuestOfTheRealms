@@ -12,7 +12,6 @@ public enum CommandNames {
     VIEW_QUESTS("view-quests"),
     START_QUEST("start-quest"),
     COMPLETED_QUESTS("completed-quests"),
-    SAVE("save"),
     HELP("help");
 
     public final String value;

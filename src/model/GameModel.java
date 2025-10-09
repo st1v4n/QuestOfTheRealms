@@ -16,6 +16,7 @@ import model.mapGenerators.BaseMapGenerator;
 import model.mapGenerators.MapGenerator;
 import model.notifiers.Notifier;
 import model.playerClasses.Player;
+import model.playerClasses.PlayerClass;
 import view.GameView;
 
 import java.util.InputMismatchException;
@@ -70,11 +71,11 @@ public class GameModel {
         autoSaver.start();
     }
 
-    public GameModel(GameView view, String mapFileName){
+    public GameModel(GameView view, String mapFileName, PlayerClass playerClass){
         daytimer = new Day();
         mapGenerator = new MapGenerator();
         try {
-            map = mapGenerator.generateMapFromFile(mapFileName);
+            map = mapGenerator.generateMapFromFile(mapFileName, playerClass);
         }
         catch(InputMismatchException inputMismatchException){
             notifier.notify(new ActionResult(Status.ERROR, inputMismatchException.getMessage()));

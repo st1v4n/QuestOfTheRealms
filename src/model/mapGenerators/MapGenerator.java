@@ -44,7 +44,7 @@ public class MapGenerator implements BaseMapGenerator{
     }
 
     @Override
-    public GameMap generateMapFromFile(String fileName){
+    public GameMap generateMapFromFile(String fileName, PlayerClass playerClass){
         List<List<GameObject>> map = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader(fileName))){
             String line;
@@ -52,7 +52,7 @@ public class MapGenerator implements BaseMapGenerator{
                 map.add(generateRowFromString(line));
             }
             if(isValid(map)){
-                Player player = new Player("Ivan", PlayerClass.MAGE);
+                Player player = new Player("Player1", playerClass);
                 GameMap resultMap = new GameMap(map, player);
                 resultMap.addEnemyAt(new Boss(), 11, 11);
                 return resultMap;
