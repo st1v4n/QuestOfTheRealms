@@ -110,6 +110,267 @@
           "type": "wall"
         },
         {
+          "type": "armor",
+          "defenseBoost": 1
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "bandit",
+          "health": 900,
+          "attack": 240
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "potion",
+          "healthBoost": 44,
+          "manaBoost": 34
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "bandit",
+          "health": 900,
+          "attack": 240
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "monster",
+          "health": 1200,
+          "attack": 220
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "monster",
+          "health": 1200,
+          "attack": 220
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "bandit",
+          "health": 900,
+          "attack": 240
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
           "type": "blank"
         },
         {
@@ -148,6 +409,69 @@
           "type": "wall"
         },
         {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "weapon",
+          "attackBoost": 22
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
           "type": "blank"
         },
         {
@@ -210,40 +534,42 @@
           "type": "wall"
         },
         {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
+          "type": "blank"
         },
         {
           "type": "blank"
         },
         {
           "type": "blank"
+        },
+        {
+          "type": "potion",
+          "healthBoost": 96,
+          "manaBoost": 18
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
+        },
+        {
+          "type": "wall"
         },
         {
           "type": "wall"
@@ -269,40 +595,44 @@
           "type": "blank"
         },
         {
+          "type": "blank"
+        },
+        {
+          "type": "bandit",
+          "health": 900,
+          "attack": 240
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
           "type": "wall"
         },
         {
           "type": "blank"
         },
         {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
+          "type": "potion",
+          "healthBoost": 50,
+          "manaBoost": 32
         },
         {
           "type": "blank"
@@ -325,40 +655,40 @@
           "type": "blank"
         },
         {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
+          "type": "wall"
         },
         {
           "type": "wall"
         },
         {
-          "type": "blank"
+          "type": "wall"
         },
         {
-          "type": "blank"
+          "type": "wall"
         },
         {
-          "type": "blank"
+          "type": "wall"
         },
         {
-          "type": "blank"
+          "type": "wall"
         },
         {
-          "type": "blank"
+          "type": "wall"
         },
         {
-          "type": "blank"
+          "type": "wall"
         },
         {
-          "type": "blank"
+          "type": "wall"
         },
         {
-          "type": "blank"
+          "type": "wall"
         },
         {
-          "type": "blank"
+          "type": "wall"
+        },
+        {
+          "type": "wall"
         },
         {
           "type": "blank"
@@ -395,335 +725,21 @@
           "type": "blank"
         },
         {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
           "type": "blank"
         },
         {
           "type": "wall"
         },
         {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        }
-      ],
-      [
-        {
-          "type": "wall"
+          "type": "bandit",
+          "health": 900,
+          "attack": 240
         },
         {
           "type": "blank"
         },
         {
           "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "wall"
-        }
-      ],
-      [
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        }
-      ],
-      [
-        {
-          "type": "wall"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "potion",
-          "healthBoost": 44,
-          "manaBoost": 21
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "potion",
-          "healthBoost": 62,
-          "manaBoost": 3
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "wall"
-        }
-      ],
-      [
-        {
-          "type": "wall"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "wall"
-        }
-      ],
-      [
-        {
-          "type": "wall"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "wall"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "blank"
-        },
-        {
-          "type": "monster",
-          "health": 1200,
-          "attack": 220
         },
         {
           "type": "boss",
@@ -805,7 +821,8 @@
           "type": "wall"
         },
         {
-          "type": "blank"
+          "type": "armor",
+          "defenseBoost": 16
         },
         {
           "type": "blank"
@@ -837,7 +854,8 @@
           "type": "blank"
         },
         {
-          "type": "blank"
+          "type": "armor",
+          "defenseBoost": 23
         },
         {
           "type": "wall"
@@ -870,7 +888,9 @@
           "type": "blank"
         },
         {
-          "type": "blank"
+          "type": "potion",
+          "healthBoost": 12,
+          "manaBoost": 24
         },
         {
           "type": "blank"
@@ -890,7 +910,8 @@
           "type": "blank"
         },
         {
-          "type": "blank"
+          "type": "armor",
+          "defenseBoost": 4
         },
         {
           "type": "blank"
@@ -935,7 +956,8 @@
           "type": "blank"
         },
         {
-          "type": "blank"
+          "type": "weapon",
+          "attackBoost": 7
         },
         {
           "type": "wall"
@@ -1068,13 +1090,13 @@
     ],
     "player": {
       "name": "Player1",
-      "health": 1700,
-      "mana": 170,
+      "health": 2500,
+      "mana": 260,
       "attack": 90,
       "defense": 40,
       "playerClass": "WARRIOR",
-      "row": 1,
-      "column": 4,
+      "row": 2,
+      "column": 3,
       "inventory": {
         "items": []
       },

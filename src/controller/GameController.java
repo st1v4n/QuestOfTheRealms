@@ -45,16 +45,10 @@ public class GameController {
 
     public void generateCommand(){
         Command command = view.getCommand();
-        if(command == null){
+        if (command == null) {
             view.showMessage("Invalid command! Use the help command to see all available commands!");
-        }
-        else {
-            CustomLocks.modificationLock.readLock().lock();
-            try {
-                command.execute(model, view);
-            } finally {
-                CustomLocks.modificationLock.readLock().unlock();
-            }
+        } else {
+            command.execute(model, view);
         }
     }
 

@@ -1,5 +1,6 @@
 package commands;
 
+import locks.CustomLocks;
 import model.GameModel;
 import view.GameView;
 
@@ -7,6 +8,11 @@ public class LeftCommand implements Command{
 
     @Override
     public void execute(GameModel model, GameView view){
-        model.movePlayer(0, -1);
+        CustomLocks.modificationLock.readLock().lock();
+        try {
+            model.movePlayer(0, -1);
+        } finally{
+            CustomLocks.modificationLock.readLock().unlock();
+        }
     }
 }

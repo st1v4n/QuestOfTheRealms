@@ -20,6 +20,7 @@ public class CommandFactory {
         commands.put(CommandNames.VIEW_QUESTS.value, new ViewQuestsCommand());
         commands.put(CommandNames.START_QUEST.value, new StartQuestCommand());
         commands.put(CommandNames.COMPLETED_QUESTS.value, new CompletedQuestsCommand());
+        commands.put(CommandNames.SAVE.value, new SaveCommand());
     }
 
     public Command create(String commandName){
