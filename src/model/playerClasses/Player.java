@@ -1,5 +1,6 @@
 package model.playerClasses;
 
+import backgroundActions.autoSavers.JsonAutoSaver;
 import backgroundActions.quests.Quest;
 import backgroundActions.quests.QuestPool;
 import model.actionResults.ActionResult;
@@ -11,6 +12,9 @@ import model.enemy.Enemy;
 import model.inventory.Inventory;
 import model.notifiers.Notifier;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 
@@ -64,10 +68,12 @@ public class Player implements Entity {
 
     public synchronized void addHealth(int amount) {
         health += amount;
+        notifier.notify(new ActionResult(Status.HEALTH_INCREASED, null));
     }
 
     public synchronized void addMana(int amount) {
         mana += amount;
+        notifier.notify(new ActionResult(Status.MANA_INCREASED, null));
         checkForCompletedQuests();
     }
 
@@ -87,7 +93,7 @@ public class Player implements Entity {
         int amount = this.attack;
         ActionResult resultFromAttacking = target.sufferAttack(amount);
         if (resultFromAttacking.isTargetEnemy()) { // ако реално сме ударили чудовище а не нещо друго
-            defend(Integer.parseInt(resultFromAttacking.getEntity().toString()));
+            defend(((Enemy)target).getAttack());
             mana -= ClassConstants.MANA_REQUIRED_FOR_ATTACK;
             checkForCompletedQuests();
             if (resultFromAttacking.getStatus().equals(Status.KILLED_ENEMY)) {
@@ -104,6 +110,13 @@ public class Player implements Entity {
         int amount = incomingDamage - ClassConstants.DEFENSE_MULTIPLIER * defense;
         health -= amount;
         if (health <= 0) {
+            notifier.notify(new ActionResult(Status.GAME_OVER, null));
+            try {
+                Path saveFilePath = Path.of(JsonAutoSaver.savingFileName);
+                Files.delete(saveFilePath);
+            } catch (IOException e) {
+                System.exit(-1);
+            }
             System.exit(0);
         }
     }
@@ -191,12 +204,14 @@ public class Player implements Entity {
     public synchronized void increaseStats(int modifier){
         this.attack *= modifier;
         this.defense *= modifier;
+        notifier.notify(new ActionResult(Status.STATS_INCREASED, null));
         checkForCompletedQuests();
     }
 
     public synchronized void decreaseStats(int modifier){
         this.attack /= modifier;
         this.defense /= modifier;
+        notifier.notify(new ActionResult(Status.STATS_DECREASED, null));
         checkForCompletedQuests();
     }
 

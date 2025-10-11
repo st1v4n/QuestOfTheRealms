@@ -1,21 +1,21 @@
 package backgroundActions;
 
 import locks.CustomLocks;
-import model.playerClasses.Player;
+import model.GameModel;
 import view.GameView;
 
 public class DayUpdater extends Thread{
 
     private final Day day;
     private final GameView view;
-    private final Player player;
+    private final GameModel model;
     private static final int DAY_UPDATE_INTERVAL = 45000;
     private static final int PLAYER_STATS_MODIFIER = 2;
 
-    public DayUpdater(Day day, GameView view, Player player){
+    public DayUpdater(Day day, GameView view, GameModel model){
         this.day = day;
         this.view = view;
-        this.player = player;
+        this.model = model;
     }
 
     @Override
@@ -33,10 +33,10 @@ public class DayUpdater extends Thread{
                 day.update();
                 if (day.isDay()) {
                     view.showMessage("The sun has appeared, it seems that the day has started! (increasing player stats)");
-                    player.increaseStats(PLAYER_STATS_MODIFIER);
+                    model.increasePlayerStats(PLAYER_STATS_MODIFIER);
                 } else {
                     view.showMessage("The moon rose on the horizon and the night settled over the world! (decreasing player stats)");
-                    player.decreaseStats(PLAYER_STATS_MODIFIER);
+                    model.decreasePlayerStats(PLAYER_STATS_MODIFIER);
                 }
             } finally {
                 CustomLocks.modificationLock.readLock().unlock();

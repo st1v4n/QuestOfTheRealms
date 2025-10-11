@@ -120,9 +120,31 @@ public class GameMap {
         notifier.notify(player.startQuest(quest));
     }
 
-    public Player getPlayer(){
-        synchronized (player) {
-            return player;
-        }
+    public void showPlayerStats(){
+        player.showStats();
+    }
+
+    public void increasePlayerStats(int modifier){
+        player.increaseStats(modifier);
+    }
+
+    public void decreasePlayerStats(int modifier){
+        player.decreaseStats(modifier);
+    }
+
+    public void addPlayerHealth(int amount){
+        player.addHealth(amount);
+    }
+
+    public void addPlayerMana(int amount){
+        player.addMana(amount);
+    }
+
+    public int getPlayerRow(){
+        return player.getRow();
+    }
+
+    public int getPlayerCol(){
+        return player.getColumn();
     }
 }

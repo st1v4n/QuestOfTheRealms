@@ -1,20 +1,39 @@
 package backgroundActions.statsIncreasers;
 
-import model.playerClasses.Player;
+import locks.CustomLocks;
+import model.GameModel;
 import view.GameView;
 
 public abstract class StatIncreaser extends Thread{
 
-    protected final int amount;
+    protected final int interval;
     protected final GameView view;
-    protected final Player player;
+    protected final GameModel model;
 
-    public StatIncreaser(int amount, Player player, GameView view){
-        this.amount = amount;
-        this.player = player;
+    public StatIncreaser(int interval, GameModel model, GameView view){
+        this.interval = interval;
+        this.model = model;
         this.view = view;
     }
 
-    public abstract void increase();
+    protected abstract void increase();
+
+    @Override
+    public void run(){
+        while(true){
+            try{
+                Thread.sleep(interval);
+            }
+            catch(InterruptedException e){
+                view.showMessage("generator failed! Switching to hardcore mode");
+            }
+            CustomLocks.modificationLock.readLock().lock();
+            try {
+                increase();
+            } finally {
+                CustomLocks.modificationLock.readLock().unlock();
+            }
+        }
+    }
 
 }

@@ -13,7 +13,7 @@ public interface BaseVisualisator {
     public static final CommandFactory factory = new CommandFactory();
     public abstract Command getCommand();
     public abstract void showMessage(String message);
-    public abstract void showMap(List<List<GameObject>> map, Player player);
+    public abstract void showMap(List<List<GameObject>> map, int playerRow, int playerCol);
     public abstract void notify(ActionResult result);
     public abstract String requireUserInput();
 

@@ -3,35 +3,22 @@ package model;
 import backgroundActions.quests.Quest;
 import backgroundActions.quests.QuestPool;
 import model.enemy.Boss;
+import model.enemy.Enemy;
+import model.gameObjects.GameObject;
+import model.items.Item;
 import model.mapGenerators.BaseMapGenerator;
 import model.mapGenerators.MapGenerator;
 import model.notifiers.Notifier;
-import model.playerClasses.Player;
 import model.playerClasses.PlayerClass;
 import view.GameView;
 
 import java.util.InputMismatchException;
+import java.util.List;
 
 public class GameModel {
 
     /*
-    GameModel е клас, който отговаря за управлението на state-a на играта и осъществяване на основната игрова логика
-    в него се намира GameMap, който всъщност е самия state на играта - местоположенията на чудовища, предмети, играчи и т.н
-    Причината, поради която GameMap е вътре в GameModel, а не GameModel да е самия GameMap, е че всъщност според мен е работа
-    на модела да изпълнява функционалности като spawner-и на чудовища/предмети, да нотифицира view-то за постигнати резултати
-    да управлява времето и механиките в играта, докато GameMap е просто състоянието на играта, което се променя от всички неща,
-    които са в модела. Ако премахнем GameModel и оставим само GameMap и набутаме всички тези QuestPool, Notifier, ItemSpawner...
-    неща в него, излиза че картата на играта си се управлява сама и сама си изпълнява функционалности върху себе си (което според
-    мен не е правилно).
-    Това е причината GameMap да изглежда като фасада.
-    Всъщност идеята на GameModel е да съдържа map, както и обекти, които да упражняват действията си върху този map.
-    Map-a само ,,страда'' от действията на model-a, като в него са дефинирани ефектите от действията на model-a (които са кръстени
-    по същия начин като в model-a, за да може да се увеличи readability-то).
-    Реално това, което става, е че контролера изпълнява комнади. Ефектът от тези команди отива към model-a (дали е атака, преместване и т.н)
-    Model-a реагира и казва на картата ,,заповядаха ми да направя с теб <това>''.
-    Картата си поема действието и реагира и съответно връща резултата от изпълнението на това действие.
-    Този резултат се връща на модела, който от своя страна го връща на контролера и резултата се представя пред потребителя от view-то (което е идеята на MVC)
-
+    Приемете, че все едно този клас го няма ... (малко е безсмислен)
      */
 
     private GameMap map;
@@ -59,10 +46,6 @@ public class GameModel {
             map.movePlayer(rowAddition, columnAddition);
     }
 
-    public Player getPlayer(){
-        return map.getPlayer();
-    }
-
     public void attackAt(int rowAddition, int colAddition){
             map.attackAt(rowAddition, colAddition);
     }
@@ -81,10 +64,56 @@ public class GameModel {
         return map.getCompletedQuestsInfo();
     }
 
-    public GameMap map(){
-        synchronized (map) {
-            return this.map;
-        }
+    public void showPlayerStats(){
+        map.showPlayerStats();
+    }
+
+    public void increasePlayerStats(int modifier){
+        map.increasePlayerStats(modifier);
+    }
+
+    public void decreasePlayerStats(int modifier){
+        map.decreasePlayerStats(modifier);
+    }
+
+    public int getMapRows(){
+        return map.getYBorder();
+    }
+
+    public int getMapCols(){
+        return map.getXBorder();
+    }
+
+    public boolean isPositionEmpty(int row, int col){
+        return map.isBlankPlace(row, col);
+    }
+
+    public void spawnEnemy(Enemy enemy, int row, int col){
+        map.addEnemyAt(enemy, row, col);
+    }
+
+    public void spawnItem(Item item, int row, int col){
+        map.addItemAt(item, row, col);
+    }
+
+    public void addPlayerHealth(int amount){
+        map.addPlayerHealth(amount);
+    }
+
+    public void addPlayerMana(int amount){
+        map.addPlayerMana(amount);
+    }
+
+    public List<List<GameObject>> getMapCopy(){
+        return map.asList();
+    }
+
+    public int getPlayerRow(){
+        return map.getPlayerRow();
+    }
+
+    public int getPlayerCol(){
+        return map.getPlayerCol();
     }
 
 }

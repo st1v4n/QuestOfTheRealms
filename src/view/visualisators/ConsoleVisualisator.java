@@ -46,13 +46,13 @@ public class ConsoleVisualisator implements BaseVisualisator{
     }
 
     @Override
-    public void showMap(List<List<GameObject>> map, Player player){
+    public void showMap(List<List<GameObject>> map, int playerRow, int playerCol){
         int rows = map.size();
         int columns = map.getFirst().size();
         for(int i = 0;i<rows;++i){
             for(int j = 0;j<columns;++j){
-                if(i == player.getRow() && j == player.getColumn()){
-                    System.out.print(getVisualisation(player.toString()));
+                if(i == playerRow && j == playerCol){
+                    System.out.print(visualisations.get("Player"));
                     continue;
                 }
                 System.out.print(getVisualisation(map.get(i).get(j).toString()));

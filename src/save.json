@@ -278,8 +278,7 @@
           "type": "blank"
         },
         {
-          "type": "weapon",
-          "attackBoost": 5
+          "type": "blank"
         },
         {
           "type": "blank"
@@ -366,6 +365,17 @@
         },
         {
           "type": "blank"
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "type": "wall"
         },
         {
           "type": "bandit",
@@ -373,17 +383,6 @@
           "attack": 240
         },
         {
-          "type": "wall"
-        }
-      ],
-      [
-        {
-          "type": "wall"
-        },
-        {
-          "type": "blank"
-        },
-        {
           "type": "blank"
         },
         {
@@ -592,14 +591,6 @@
         },
         {
           "type": "blank"
-        },
-        {
-          "type": "weapon",
-          "attackBoost": 5
-        },
-        {
-          "type": "weapon",
-          "attackBoost": 19
         },
         {
           "type": "blank"
@@ -609,8 +600,16 @@
         },
         {
           "type": "potion",
-          "healthBoost": 27,
-          "manaBoost": 8
+          "healthBoost": 44,
+          "manaBoost": 21
+        },
+        {
+          "type": "blank"
+        },
+        {
+          "type": "potion",
+          "healthBoost": 62,
+          "manaBoost": 3
         },
         {
           "type": "wall"
@@ -698,9 +697,7 @@
           "type": "blank"
         },
         {
-          "type": "bandit",
-          "health": 900,
-          "attack": 240
+          "type": "blank"
         },
         {
           "type": "blank"
@@ -724,7 +721,9 @@
           "type": "blank"
         },
         {
-          "type": "blank"
+          "type": "monster",
+          "health": 1200,
+          "attack": 220
         },
         {
           "type": "boss",
@@ -735,9 +734,7 @@
           "type": "blank"
         },
         {
-          "type": "potion",
-          "healthBoost": 12,
-          "manaBoost": 40
+          "type": "blank"
         },
         {
           "type": "blank"
@@ -802,9 +799,7 @@
           "type": "blank"
         },
         {
-          "type": "monster",
-          "health": 1200,
-          "attack": 220
+          "type": "blank"
         },
         {
           "type": "wall"
@@ -842,9 +837,7 @@
           "type": "blank"
         },
         {
-          "type": "monster",
-          "health": 1200,
-          "attack": 220
+          "type": "blank"
         },
         {
           "type": "wall"
@@ -903,8 +896,7 @@
           "type": "blank"
         },
         {
-          "type": "weapon",
-          "attackBoost": 6
+          "type": "blank"
         },
         {
           "type": "blank"
@@ -972,11 +964,6 @@
           "type": "wall"
         },
         {
-          "type": "monster",
-          "health": 1200,
-          "attack": 220
-        },
-        {
           "type": "blank"
         },
         {
@@ -992,9 +979,10 @@
           "type": "blank"
         },
         {
-          "type": "monster",
-          "health": 1200,
-          "attack": 220
+          "type": "blank"
+        },
+        {
+          "type": "blank"
         },
         {
           "type": "blank"
@@ -1080,19 +1068,17 @@
     ],
     "player": {
       "name": "Player1",
-      "health": 3100,
-      "mana": 360,
-      "attack": 22,
-      "defense": 10,
+      "health": 1700,
+      "mana": 170,
+      "attack": 90,
+      "defense": 40,
       "playerClass": "WARRIOR",
-      "row": 4,
-      "column": 12,
+      "row": 1,
+      "column": 4,
       "inventory": {
         "items": []
       },
-      "startedQuests": [
-        "mana"
-      ],
+      "startedQuests": [],
       "completedQuests": []
     }
   }

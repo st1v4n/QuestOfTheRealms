@@ -24,8 +24,8 @@ public class GameView implements Observer {
         visualisator.showMessage(message);
     }
 
-    public synchronized void showMap(List<List<GameObject>> map, Player player){
-        visualisator.showMap(map, player);
+    public synchronized void showMap(List<List<GameObject>> map, int playerRow, int playerCol){
+        visualisator.showMap(map, playerRow, playerCol);
     }
 
     @Override
