@@ -2,17 +2,12 @@ package model;
 
 import backgroundActions.quests.Quest;
 import backgroundActions.quests.QuestPool;
-import model.enemy.Boss;
 import model.enemy.Enemy;
 import model.gameObjects.GameObject;
 import model.items.Item;
-import model.mapGenerators.BaseMapGenerator;
-import model.mapGenerators.MapGenerator;
 import model.notifiers.Notifier;
 import model.playerClasses.PlayerClass;
 import view.GameView;
-
-import java.util.InputMismatchException;
 import java.util.List;
 
 public class GameModel {
@@ -23,7 +18,6 @@ public class GameModel {
 
     private GameMap map;
     private transient Notifier notifier;
-    private transient BaseMapGenerator mapGenerator;
 
     public void init(GameView view){
         notifier = new Notifier();
@@ -31,16 +25,8 @@ public class GameModel {
         map.setEventNotifier(notifier);
     }
 
-    public GameModel(GameView view, String mapFileName, PlayerClass playerClass){
-        mapGenerator = new MapGenerator();
-        try {
-            map = mapGenerator.generateMapFromFile(mapFileName, playerClass);
-            this.init(view);
-            map.addEnemyAt(new Boss(), 11, 11);
-        }
-        catch(InputMismatchException inputMismatchException){
-            System.exit(-1);
-        }
+    public GameModel(GameView view){
+        init(view);
     }
     public void movePlayer(int rowAddition, int columnAddition){
             map.movePlayer(rowAddition, columnAddition);
@@ -114,6 +100,10 @@ public class GameModel {
 
     public int getPlayerCol(){
         return map.getPlayerCol();
+    }
+
+    public void generatePlayer(PlayerClass playerClass){
+        map.generatePlayer(playerClass);
     }
 
 }

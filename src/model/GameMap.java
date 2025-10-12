@@ -8,6 +8,7 @@ import model.enemy.Enemy;
 import model.items.Item;
 import model.notifiers.Notifier;
 import model.playerClasses.Player;
+import model.playerClasses.PlayerClass;
 import model.terrain.Blank;
 
 import java.util.*;
@@ -19,7 +20,7 @@ public class GameMap {
      */
 
     private List<List<GameObject>> map;
-    private final Player player;
+    private Player player;
     private transient Notifier notifier;
 
     public GameMap(List<List<GameObject>> map, Player player){
@@ -146,5 +147,9 @@ public class GameMap {
 
     public int getPlayerCol(){
         return player.getColumn();
+    }
+
+    public synchronized void generatePlayer(PlayerClass playerClass){
+        this.player = new Player("Player", playerClass);
     }
 }

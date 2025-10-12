@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 
 public class Main {
 
-    public static final String mapFileName = "src/view/mainMap.txt";
+    public static final String newMapFileName = "src/new.json";
 
     private static int getValueInInterval(int intervalStart, int intervalEnd, GameView gameView){
         String input = "";
@@ -42,17 +42,27 @@ public class Main {
         gameView.showMessage("1. New game");
         gameView.showMessage("2. Existing game");
         int selection = getValueInInterval(1 , 2, gameView);
+        GameModel model;
         switch (selection){
             case 1:
-                return new GameModel(gameView, mapFileName, getPlayerClass(gameView));
+                try {
+                    model = (new FileStorage()).load(gameView, newMapFileName);
+                    model.generatePlayer(getPlayerClass(gameView));
+                    model.init(gameView);
+                    return model;
+                } catch(FileNotFoundException e){
+                    gameView.showMessage(e.getMessage());
+                    System.exit(-1);
+                }
             case 2:
                 try {
-                    GameModel model = (new FileStorage()).load(gameView, JsonAutoSaver.savingFileName);
+                    model = (new FileStorage()).load(gameView, JsonAutoSaver.savingFileName);
+                    model.init(gameView);
                     return model;
                 } catch (FileNotFoundException e){
                     gameView.showMessage(e.getMessage());
-                    System.exit(0);
-                } break;
+                    System.exit(-1);
+                }
         }
         return null;
     }

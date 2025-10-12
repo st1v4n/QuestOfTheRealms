@@ -71,7 +71,6 @@ public class FileStorage implements BaseStorage{
         try (FileReader reader = new FileReader(filename)) {
             GameModel model = gson.fromJson(reader, GameModel.class);
             if(model == null)throw new FileNotFoundException("Game was not properly saved!");
-            model.init(view);
             return model;
         } catch (IOException e) {
             throw new FileNotFoundException("No saves exist!");
